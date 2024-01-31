@@ -5,6 +5,7 @@
   # fi
 
 
+
   HISTCONTROL=ignoreboth:erasedups
   HISTSIZE=99999
   HISTFILESIZE=999999

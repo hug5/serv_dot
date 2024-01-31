@@ -34,7 +34,7 @@ set expandtab
 set shiftwidth=4
 " Show visual line under cursor's current line
 " Depending on color theme, this can look good/ugly; 
-set cursorline
+"set cursorline
 " Show the matching part of the pair for [], {} and ()
 set showmatch
 " Enable all python syntax highlighting features
