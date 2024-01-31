@@ -1,0 +1,12 @@
+# 01/30/2024
+
+.bash_hs is hardlinked to .../shell-scripts/hs_search.sh.
+
+Copy .bash_hs to home folder to use.
+
+Create alias in .bashrc file:
+
+  alias hs='. ~/.bash_hs'
+
+
+
