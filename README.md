@@ -5,6 +5,6 @@
 
 - ~/.bash_aliases
 - ~/.vimrc
-- ~/.git/.config
-
+- ~/.gitconfig
+- ../<git_project>/.config
 
