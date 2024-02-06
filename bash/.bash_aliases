@@ -175,6 +175,34 @@
   alias chmod='chmod -v --preserve-root'
   alias chown='chown -v --preserve-root'
 
+###_____ Trash-cli ____________________________________________________
+
+  sep_graph='•  •  •  •  •  •  •  •'
+
+  alias trasher='sudo trash-empty && trash-empty -f && echo trash-empty sudo+$USER. Okay.'
+  alias trashe='trash-empty -f && echo trash-empty $USER. Okay.'
+
+  alias trashlr='echo sudo trash-list: && sudo trash-list && echo $sep_graph && echo $USER trash-list: && trash-list && echo $sep_graph'
+  alias trashl='echo $USER trash-list: && trash-list && echo $sep_graph'
+
+  alias rmt='trash-put';
+
+
+###_____ System command flag modifications _____________________________
+
+
+  alias rm='rmt'
+  alias rmm='/usr/bin/rm -vi'
+  alias rmmm='/usr/bin/rm -vI'
+  alias rmdir='rmdir -v'
+  alias cp='cp -v'
+  alias mv='mv -vi'
+  alias ln='ln -v'
+  alias mkdir='mkdir -vp'
+  alias chmod='chmod -v --preserve-root'
+  alias chown='chown -v --preserve-root'
+
+
 ###_____ Disk Info ____________________________________________________
 
 
@@ -234,3 +262,9 @@
   alias ranger=". ranger"
 
 
+###_____ Git __________________________________________________________
+
+  alias g="git"
+  alias gs="git status"
+  alias gaa="git add --all && git status && echo '-- all files staged --'"
+  source /usr/share/bash-completion/completions/git
