@@ -2,21 +2,23 @@
 " ---------------------------------------
 
 " Line number
-:set number
+set number
 "
 " Relative line number
 " :set relativenumber
 "
 " ignore case in search
-:set ic
+set ic
 "
 " set highlight search
-:set hls
+set hls
 " Can unset highlight with, :nohl
 "
 " incremental search
 :set is
 
+" Show status line, or last status:
+"set ls=2
 
 
 "https://www.fullstackpython.com/vim.html
