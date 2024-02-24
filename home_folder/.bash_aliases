@@ -1,16 +1,22 @@
-###_____ Bashrc _______________________________________________________
+#------------------------------------------------------------------
+### Bashrc
+#------------------------------------------------------------------
 
   # if [ -f ~/.bash_aliases ]; then
   #     . ~/.bash_aliases
   # fi
 
 
-
   HISTCONTROL=ignoreboth:erasedups
   HISTSIZE=99999
   HISTFILESIZE=999999
+
   shopt -s histappend
   shopt -s checkwinsize
+
+  bind 'set completion-ignore-case on'
+  bind 'set match-hidden-files off'
+
 
   if [ -x /usr/bin/dircolors ]; then
       test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -29,8 +35,9 @@
 
   alias hs='. ~/.bash_hs'
 
-###_____ ls aliases ___________________________________________________
-
+#------------------------------------------------------------------
+### ls aliases
+#------------------------------------------------------------------
 
   ## Basic ls aliases
 
@@ -132,7 +139,9 @@
   alias lD='ls -dr */'
   alias llD='ls -lAFr | grep "^d"'
 
-###_____ Navigation + CD Shortcuts ____________________________________
+#------------------------------------------------------------------
+### Navigation + CD Shortcuts
+#------------------------------------------------------------------
 
 
   # cd shortcuts
@@ -175,7 +184,10 @@
   alias chmod='chmod -v --preserve-root'
   alias chown='chown -v --preserve-root'
 
-###_____ Trash-cli ____________________________________________________
+#------------------------------------------------------------------
+### Trash-cli
+#------------------------------------------------------------------
+
 
   sep_graph='•  •  •  •  •  •  •  •'
 
@@ -188,7 +200,9 @@
   alias rmt='trash-put';
 
 
-###_____ System command flag modifications _____________________________
+#------------------------------------------------------------------
+### System command flag modifications
+#------------------------------------------------------------------
 
 
   alias rm='rmt'
@@ -203,7 +217,9 @@
   alias chown='chown -v --preserve-root'
 
 
-###_____ Disk Info ____________________________________________________
+#------------------------------------------------------------------
+### Disk Info
+#------------------------------------------------------------------
 
 
 
@@ -243,26 +259,34 @@
   # This was the old way we excluded snaps/loops
   #alias lsblkld='lsblk -po +LABEL,UUID,fstype,fssize,fsused,fsuse% | grep "/dev/sd.*"'
 
-###_____ Python virtual environment activate/deactivate _______________
+#------------------------------------------------------------------
+### Python virtual environment activate/deactivate
+#------------------------------------------------------------------
 
   # python alias to start virtual environment
   alias vactivate=". ./.venv/bin/activate"
   alias veactivate=vactivate
 
-###______ Search aliases ______________________________________________
+#------------------------------------------------------------------
+### Search aliases
+#------------------------------------------------------------------
 
   alias fdgo='cd "$(dirname "$(fd | fzf)")"'
   alias fdgod='cd "$(fd -t d | fzf)"'
   alias fd='fdfind --hidden'
 
-###_____ Ranger _______________________________________________________
+#------------------------------------------------------------------
+### Ranger
+#------------------------------------------------------------------
 
   # start ranger as a source so that when exit
   # ranger, it will exit in the selected directory;
   alias ranger=". ranger"
 
 
-###_____ Git __________________________________________________________
+#------------------------------------------------------------------
+### Git
+#------------------------------------------------------------------
 
   alias g="git"
   alias gs="git status"
