@@ -8,7 +8,7 @@ $ git clone https://github.com/hug5/serv_config.git
 
 ### Copy to ~/folder
 
-### home_folder
+**home_folder**
   - .vimrc
   - .gitconfig
   - .bash_hs
@@ -16,7 +16,7 @@ $ git clone https://github.com/hug5/serv_config.git
 
 ### Config file per git project
 
-git_project
+**git_project**
   - .config
 
 
