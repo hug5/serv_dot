@@ -53,4 +53,9 @@ let python_highlight_all = 1
 " colorscheme zenburn
 " colorscheme gruvbox
 " colorscheme gruvbox8_soft
+" colorscheme gruvbox8_hard
 " colorscheme robinhood
+"
+" colorscheme evening
+" colorscheme desert
+" colorscheme habamax

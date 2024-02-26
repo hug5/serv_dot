@@ -13,6 +13,7 @@
 
   shopt -s histappend
   shopt -s checkwinsize
+  shopt -s autocd direxpand dirspell cdspell
 
   bind 'set completion-ignore-case on'
   bind 'set match-hidden-files off'
@@ -29,11 +30,13 @@
       alias egrep='egrep --color=auto'
   fi
 
-  shopt -s autocd direxpand dirspell cdspell
 
   export EDITOR=/usr/bin/vim.basic
 
   alias hs='. ~/.bash_hs'
+
+  # Enable zoxide in bash
+  eval "$(zoxide init bash)"
 
 #------------------------------------------------------------------
 ### ls aliases
@@ -139,6 +142,7 @@
   alias lD='ls -dr */'
   alias llD='ls -lAFr | grep "^d"'
 
+
 #------------------------------------------------------------------
 ### Navigation + CD Shortcuts
 #------------------------------------------------------------------
@@ -197,17 +201,16 @@
   alias trashlr='echo sudo trash-list: && sudo trash-list && echo $sep_graph && echo $USER trash-list: && trash-list && echo $sep_graph'
   alias trashl='echo $USER trash-list: && trash-list && echo $sep_graph'
 
-  alias rmt='trash-put';
-
+  alias rm='trash-put'
+  alias sudo-rm="sudo trash-put"
 
 #------------------------------------------------------------------
 ### System command flag modifications
 #------------------------------------------------------------------
 
 
-  alias rm='rmt'
-  alias rmm='/usr/bin/rm -vi'
-  alias rmmm='/usr/bin/rm -vI'
+  alias rmm='\rm -vi'      # bypass alias; interactive every delete;
+  alias rmmm='\rm -vI'     # bypass alias; interactive once;
   alias rmdir='rmdir -v'
   alias cp='cp -v'
   alias mv='mv -vi'
