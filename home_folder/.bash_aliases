@@ -295,3 +295,18 @@
   alias gs="git status"
   alias gaa="git add --all && git status && echo '-- all files staged --'"
   source /usr/share/bash-completion/completions/git
+
+
+#------------------------------------------------------------------
+### uWSGI + nginx aliases
+#------------------------------------------------------------------
+  # These aliases are only for remote servers;
+
+  alias j=jobs
+
+  alias ur="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
+
+  alias us='sudo systemctl status uwsgi-emperor'
+
+  alias nr="sudo systemctl reload nginx && echo 'nginx reloaded'"
+  alias ns="sudo systemctl status nginx"
