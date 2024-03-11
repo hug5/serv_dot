@@ -298,15 +298,23 @@
 
 
 #------------------------------------------------------------------
-### uWSGI + nginx aliases
+### Useful Remote Server Aliasses
 #------------------------------------------------------------------
-  # These aliases are only for remote servers;
+
+  alias sv="sudo vim"
+  alias ss="sudo systemctl"
+  alias ssrl="sudo systemctl reload"
+  alias ssrs="sudo systemctl restart"
+  alias sss="sudo systemctl status"
+
+
+  ## uWSGI + nginx aliases
 
   alias j=jobs
 
-  alias ur="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
+  alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
-  alias nr="sudo systemctl reload nginx && echo 'nginx reloaded'"
+  alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
   alias ns="sudo systemctl status nginx"
