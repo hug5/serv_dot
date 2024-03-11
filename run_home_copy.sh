@@ -23,6 +23,7 @@ function doCopy() {
     # sudo cp home_folder/.bash_aliases /tmp/home_folder
     sudo cp home_folder/.vimrc /root/
     echo "Copied."
+    echo "Run 'source ~/.bashrc'"
 }
 
 
