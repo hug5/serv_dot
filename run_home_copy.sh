@@ -7,7 +7,6 @@
 
 
 function doCopy() {
-return
 
     echo "Ctrl-c to cancel."
     echo -n "Doing copy in 3 seconds... "

@@ -293,13 +293,39 @@
 
   alias g="git"
   alias gs="git status"
-  alias gaa="git add --all && git status && echo '-- all files staged --'"
+  #alias gaa="git add --all && git status && echo '-- all files staged --'"
   source /usr/share/bash-completion/completions/git
 
 
 #------------------------------------------------------------------
 ### Useful Remote Server Aliasses
 #------------------------------------------------------------------
+
+  # Display help for keyboard shorts/aliases; use s-h;
+  function _show_help_kb_aliases() {
+cat << EOF
+ s-h:  This help
+
+  sv:  sudo vim
+  ss:  sudo systemctl
+ssrl:  sudo systemctl reload
+ssrs:  sudo systemctl restart
+ sss:  sudo systemctl status
+
+   j:  jobs
+
+ urs:  uwsgi restart
+  us:  uwsgi satus
+ nrl:  nginx reload
+  ns:  nginx status
+
+EOF
+  }
+
+
+
+  alias s-h=_show_help_kb_aliases
+
 
   alias sv="sudo vim"
   alias ss="sudo systemctl"
@@ -318,3 +344,6 @@
 
   alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
   alias ns="sudo systemctl status nginx"
+
+
+
