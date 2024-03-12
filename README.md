@@ -1,22 +1,24 @@
 ### serv_config
 
+-------------
 
 ## Server config files
 
-$ git clone https://github.com/hug5/serv_config.git
+$ git clone https://github.com/hug5/serv_config.git <br/>
 $ cd serv_config
 
-# Can run script to copy files:
+#### \# Can run script to copy files:
+
 $ source run_home_copy.sh
 
-# OR
+#### \# OR
 
-$ ./run_home_copy.sh
+$ ./run_home_copy.sh <br/>
 $ source ~/.bashrc
 
-. . . .
+-------------
 
-### Home folder
+### \# Home folder
 
 \# ~/
 
@@ -26,8 +28,8 @@ $ source ~/.bashrc
     .bash_aliases
 
 
-### Config file per git project
+### \# Config file per git project
 
-\# <git_project>
+.../<git_project>
 
     .config

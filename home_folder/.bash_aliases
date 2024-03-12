@@ -313,6 +313,12 @@ ssrs:  sudo systemctl restart
  sss:  sudo systemctl status
 
    j:  jobs
+   f:  fg
+  f1:  fg 1
+  f2:  fg 2
+  f3:  fg 3
+  f4:  fg 4
+  f5:  fg 5
 
  urs:  uwsgi restart
   us:  uwsgi satus
@@ -323,21 +329,28 @@ EOF
   }
 
 
-
+  # show this help
   alias s-h=_show_help_kb_aliases
 
-
+  # sudo vim alias
   alias sv="sudo vim"
+
+  # systemctl aliases
   alias ss="sudo systemctl"
   alias ssrl="sudo systemctl reload"
   alias ssrs="sudo systemctl restart"
   alias sss="sudo systemctl status"
 
+  # Jobs aliases
+  alias j="jobs"
+  alias f="fg"
+  alias f1="fg 1"
+  alias f2="fg 2"
+  alias f3="fg 3"
+  alias f4="fg 4"
+  alias f5="fg 5"
 
-  ## uWSGI + nginx aliases
-
-  alias j=jobs
-
+  # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
 
   alias us='sudo systemctl status uwsgi-emperor'

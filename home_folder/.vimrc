@@ -3,7 +3,10 @@
 
 " Line number
 set number
-"
+
+" set paste
+set paste
+
 " Relative line number
 " :set relativenumber
 "
@@ -15,7 +18,7 @@ set hls
 " Can unset highlight with, :nohl
 "
 " incremental search
-:set is
+set is
 
 " Show status line, or last status:
 "set ls=2
