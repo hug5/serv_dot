@@ -358,5 +358,10 @@ EOF
   alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
   alias ns="sudo systemctl status nginx"
 
+  alias prl="sudo postfix reload"
+  alias pch="sudo postfix check"
+  alias ps="sudo systemctl status postfix"
+  alias ps@="sudo systemctl status postfix@-"
+
 
 
