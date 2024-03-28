@@ -293,9 +293,14 @@
 
   alias g="git"
   alias gs="git status"
-  #alias gaa="git add --all && git status && echo '-- all files staged --'"
-  source /usr/share/bash-completion/completions/git
+  alias gaa="git add --all && git status && echo '-- all files staged --'"
+  alias gca="git commit --amend --no-edit && git status && echo '-- changes committed, amended, no edit --'"
+  alias gcm="git commit --message"
+  alias gl="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s    %C(red)%d\""
+  alias gb="git branch -v"
+  alias gc="git checkout"
 
+  source /usr/share/bash-completion/completions/git
 
 #------------------------------------------------------------------
 ### Useful Remote Server Aliasses
