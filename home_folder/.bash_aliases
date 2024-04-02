@@ -55,6 +55,7 @@
 
   # List long, all; include hidden files
   alias ll='ls -alFh'
+  alias sll='sudo ls -alFh'
   alias la='ls -AF'
     # -a : all (include hidden files)
     # -l : long listing format
@@ -195,14 +196,14 @@
 
   sep_graph='•  •  •  •  •  •  •  •'
 
-  alias trasher='sudo trash-empty && trash-empty -f && echo trash-empty sudo+$USER. Okay.'
+  alias trasher='sudo trash-empty -f && trash-empty -f && echo trash-empty sudo+$USER. Okay.'
   alias trashe='trash-empty -f && echo trash-empty $USER. Okay.'
 
   alias trashlr='echo sudo trash-list: && sudo trash-list && echo $sep_graph && echo $USER trash-list: && trash-list && echo $sep_graph'
   alias trashl='echo $USER trash-list: && trash-list && echo $sep_graph'
 
   alias rm='trash-put'
-  alias sudo-rm="sudo trash-put"
+  alias srm="sudo trash-put"
 
 #------------------------------------------------------------------
 ### System command flag modifications
