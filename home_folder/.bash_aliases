@@ -32,6 +32,7 @@
 
 
   export EDITOR=/usr/bin/vim.basic
+  export SUDO_EDITOR=/usr/bin/vim.basic
 
   alias hs='. ~/.bash_hs'
 
@@ -312,11 +313,16 @@
 cat << EOF
  s-h:  This help
 
-  sv:  sudo vim
+  sv:  sudoeditor
   ss:  sudo systemctl
 ssrl:  sudo systemctl reload
 ssrs:  sudo systemctl restart
  sss:  sudo systemctl status
+
+ ssl: sudo tail /var/log/syslog -f
+ sml: sudo tail /var/log/mail.log -f
+ sjc: sudo journalctl -f
+
 
    j:  jobs
    f:  fg
@@ -331,6 +337,11 @@ ssrs:  sudo systemctl restart
  nrl:  nginx reload
   ns:  nginx status
 
+ prl: postfix reload
+pchk: postfix check
+  ps: systemctl status postfix
+ ps@: systemctl tatus postfix@-
+
 EOF
   }
 
@@ -338,14 +349,18 @@ EOF
   # show this help
   alias s-h=_show_help_kb_aliases
 
-  # sudo vim alias
-  alias sv="sudo vim"
+  # sudoeditor alias; should start vim in safe sudo mode;
+  alias sv="sudoeditor"
 
   # systemctl aliases
   alias ss="sudo systemctl"
   alias ssrl="sudo systemctl reload"
   alias ssrs="sudo systemctl restart"
   alias sss="sudo systemctl status"
+
+  alias ssl="sudo tail /var/log/syslog -f"
+  alias sjc="sudo journalctl -f"
+  alias sml="sudo tail /var/log/mail.log -f"
 
   # Jobs aliases
   alias j="jobs"
@@ -355,17 +370,20 @@ EOF
   alias f3="fg 3"
   alias f4="fg 4"
   alias f5="fg 5"
+  alias f6="fg 6"
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
+  # nginx
   alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
   alias ns="sudo systemctl status nginx"
 
+  # postfix
   alias prl="sudo postfix reload"
-  alias pch="sudo postfix check"
+  alias pchk="sudo postfix check"
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
