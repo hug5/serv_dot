@@ -359,32 +359,13 @@ mailq-da: mail delete ALL
 
 EOF
   }
-  # postfix mail queue commands:
-  # mailq
-    # View the mail queue
-
-  alias mailq-f1="sudo postsuper -r ALL"
-  alias mailq-f2="sudo postqueue -f"
-  alias mailq-f3="sudo postfix flush"
-  alias mailq-f4="mailq -q"
-    # Requeue all messages or flush the queue
-
-  alias mailq-dd="sudo postsuper -d ALL deferred"
-    # Delete all deferred; Probably want to try this first
-
-  alias mailq-da="sudo postsuper -d ALL"
-    # Delete all
-    # Do this if you really want to get rid of all queus; but danger is that it will remove all incoming as well;
-
-
-
-
 
   # show this help
   alias s-h=_show_help_kb_aliases
 
   # sudoedit alias; should start vim in safe sudo mode;
-  alias sv="sudoedit"
+  # alias sv="sudoedit"  # Don't like that it doesn't save until exit;
+  alias sv="sudo vim"
 
   # systemctl aliases
   alias ss="sudo systemctl"
@@ -437,5 +418,4 @@ EOF
   alias mailq-da="sudo postsuper -d ALL"
     # Delete all
     # Do this if you really want to get rid of all queus; but danger is that it will remove all incoming as well;
-
 
