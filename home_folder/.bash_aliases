@@ -319,9 +319,9 @@ ssrl:  sudo systemctl reload
 ssrs:  sudo systemctl restart
  sss:  sudo systemctl status
 
- ssl: sudo tail /var/log/syslog -f
- sml: sudo tail /var/log/mail.log -f
- sjc: sudo journalctl -f
+sl-f: sudo tail /var/log/syslog -f
+ml-f: sudo tail /var/log/mail.log -f
+jc-f: sudo journalctl -f
 
 
    j:  jobs
@@ -349,8 +349,8 @@ EOF
   # show this help
   alias s-h=_show_help_kb_aliases
 
-  # sudoeditor alias; should start vim in safe sudo mode;
-  alias sv="sudoeditor"
+  # sudoedit alias; should start vim in safe sudo mode;
+  alias sv="sudoedit"
 
   # systemctl aliases
   alias ss="sudo systemctl"
@@ -358,12 +358,12 @@ EOF
   alias ssrs="sudo systemctl restart"
   alias sss="sudo systemctl status"
 
-  alias ssl="sudo tail /var/log/syslog -f"
-  alias sjc="sudo journalctl -f"
-  alias sml="sudo tail /var/log/mail.log -f"
+  alias sl-f="sudo tail /var/log/syslog -f"
+  alias jc-f="sudo journalctl -f"
+  alias ml-f="sudo tail /var/log/mail.log -f"
 
   # Jobs aliases
-  alias j="jobs"
+  alias j="jobs -l"
   alias f="fg"
   alias f1="fg 1"
   alias f2="fg 2"
