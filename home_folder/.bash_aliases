@@ -313,11 +313,11 @@
 cat << EOF
  s-h:  This help
 
-  sv:  sudoeditor
-  ss:  sudo systemctl
-ssrl:  sudo systemctl reload
-ssrs:  sudo systemctl restart
- sss:  sudo systemctl status
+  sv:  sudo vim
+  ss:  sudo systemctl [command] [service]
+ssrl:  sudo systemctl reload [service]
+ssrs:  sudo systemctl restart [service]
+ sss:  sudo systemctl status [service]
 
 sl-f: sudo tail /var/log/syslog -f
 ml-f: sudo tail /var/log/mail.log -f
@@ -342,8 +342,42 @@ pchk: postfix check
   ps: systemctl status postfix
  ps@: systemctl tatus postfix@-
 
+....
+
+# Mail queue commands:
+
+mailq: display the mail queue
+
+mailq-f1: sudo postsuper -r ALL
+mailq-f2: sudo postqueue -f
+mailq-f3: sudo postfix flush
+mailq-f4: mailq -q
+  # Various mail queue flush commands
+
+mailq-dd: mail delete ALL deferred
+mailq-da: mail delete ALL
+
 EOF
   }
+  # postfix mail queue commands:
+  # mailq
+    # View the mail queue
+
+  alias mailq-f1="sudo postsuper -r ALL"
+  alias mailq-f2="sudo postqueue -f"
+  alias mailq-f3="sudo postfix flush"
+  alias mailq-f4="mailq -q"
+    # Requeue all messages or flush the queue
+
+  alias mailq-dd="sudo postsuper -d ALL deferred"
+    # Delete all deferred; Probably want to try this first
+
+  alias mailq-da="sudo postsuper -d ALL"
+    # Delete all
+    # Do this if you really want to get rid of all queus; but danger is that it will remove all incoming as well;
+
+
+
 
 
   # show this help
@@ -387,5 +421,21 @@ EOF
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
+  # postfix mail queue commands:
+  # mailq
+    # View the mail queue
+
+  alias mailq-f1="sudo postsuper -r ALL"
+  alias mailq-f2="sudo postqueue -f"
+  alias mailq-f3="sudo postfix flush"
+  alias mailq-f4="mailq -q"
+    # Requeue all messages or flush the queue
+
+  alias mailq-dd="sudo postsuper -d ALL deferred"
+    # Delete all deferred; Probably want to try this first
+
+  alias mailq-da="sudo postsuper -d ALL"
+    # Delete all
+    # Do this if you really want to get rid of all queus; but danger is that it will remove all incoming as well;
 
 
