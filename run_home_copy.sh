@@ -34,16 +34,16 @@ echo "home_folder:"
 echo $(ls -AF home_folder) | tr [:space:] '\n'
 echo
 # Get confirmation
-read -p "Copy configuration files to ~/ home folder and .vimrc to /root folder? (y/n): " CHOICE
+read -p "Copy configuration files to ~/ home folder and .vimrc to /root folder? (Y/n): " CHOICE
 
 case "$CHOICE" in
 
-  y|Y )
-      read -p "THIS CANNOT BE UNDONE!! Press key to continue: "
-      doCopy
-      ;;
-  n|N|* )
+  n|N )
       echo "Canceled."
+      ;;
+  y|Y|* )
+      read -p "THIS CANNOT BE UNDONE!! Press any key to continue: "
+      doCopy
       ;;
 esac
 
