@@ -416,3 +416,38 @@ EOF
   alias mailq-da="sudo postsuper -d ALL"
     # Delete all
     # Do this if you really want to get rid of all queus; but danger is that it will remove all incoming as well;
+
+  function _sendmail-help() {
+cat << EOF
+ s-h:  This help
+
+ # Sendmail syntax:
+
+ $ sendmail -f <return_path@myserver.com> <to_recipient@yahoo.com>
+ > To: alias<to_recipient@yahoo.com>
+ > CC: alias<cc_name@yahoo.com>
+ > BCC: alias<bcc_name@yahoo.com>
+ > From: alias<my@email.com>
+ > Subject: Test mail
+ > This is the body of the message
+ > .
+
+EOF
+  }
+
+  function _mail-help() {
+cat << EOF
+ s-h:  This help
+
+
+ $ mail <recipient_email> -r <return_address> -u <sender_email>
+   # Include recipient directly;
+
+ $ mail -r <return_address> -u <sender_email>
+  # mail will ask for the recipient address
+
+EOF
+  }
+
+  alias sendmail-h=_sendmail-help
+  alias mail-h=_mail-help

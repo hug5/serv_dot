@@ -2,12 +2,11 @@
 # This is Git's per-user configuration file.
 # This is not the system config, which would be located, /etc/gitconfig
 
+## Change the credentials:
 [user]
   name = hug5
   email = dhub2@gmx.com
-# Please adapt and uncomment the following lines:
-# name = h5
-# email = h5@hubm.(none)
+
 [core]
   editor = vim
 #  excludesfile = /home/h5/.gitignore_global
