@@ -310,32 +310,35 @@
 
   function _sendmail-help() {
 cat << EOF
- s-h:  This help
+sendmail-h:  This help
 
- # Sendmail syntax:
+# sendmail syntax:
 
- $ sendmail -f <return_path@myserver.com> <to_recipient@yahoo.com>
- > To: alias<to_recipient@yahoo.com>
- > CC: alias<cc_name@yahoo.com>
- > BCC: alias<bcc_name@yahoo.com>
- > From: alias<my@email.com>
- > Subject: Test mail
- > This is the body of the message
- > .
+$ sendmail -f <return_path@myserver.com> <to_recipient@yahoo.com>
+> To: alias<to_recipient@yahoo.com>
+> CC: alias<cc_name@yahoo.com>
+> BCC: alias<bcc_name@yahoo.com>
+> From: alias<my@email.com>
+> Subject: Test mail
+> This is the body of the message
+> .
 
 EOF
   }
 
   function _mail-help() {
 cat << EOF
- s-h:  This help
+mail-h:  This help
 
+# mail syntax:
 
- $ mail <recipient_email> -r <return_address> -u <sender_email>
-   # Include recipient directly;
+$ mail <recipient_email> -r <return_address> -u <sender_email>
+ # Include recipient directly;
 
- $ mail -r <return_address> -u <sender_email>
+$ mail -r <return_address> -u <sender_email>
   # mail will ask for the recipient address
+
+# ctrl-d to send mail and exit;
 
 EOF
   }
