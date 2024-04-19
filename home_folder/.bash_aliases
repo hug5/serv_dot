@@ -335,7 +335,8 @@ $ mail -r <return_address> -u <sender_email>
 # ctrl-d to send mail and exit;
 EOF
   }
-  function _postfix-help) {
+
+  function _postfix-help() {
 cat << EOF
 postfix-h:  This help
 
