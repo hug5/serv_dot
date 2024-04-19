@@ -308,27 +308,21 @@
 ### Useful Remote Server Aliasses
 #------------------------------------------------------------------
 
-  function _sendmail-help() {
+  function _mail-help() {
 cat << EOF
-sendmail-h:  This help
+mail-h: This help
 
 # sendmail syntax:
 
-$ sendmail -f <return_path@myserver.com> <to_recipient@yahoo.com>
-> To: alias<to_recipient@yahoo.com>
-> CC: alias<cc_name@yahoo.com>
-> BCC: alias<bcc_name@yahoo.com>
-> From: alias<my@email.com>
-> Subject: Test mail
+$ sendmail -f <return_address> <to_recipient>
+> To: alias<to_recipient>
+> CC: alias<cc_email>
+> BCC: alias<bcc_email>
+> From: alias<sender_email>
+> Subject: Subject Line
 > This is the body of the message
 > .
 
-EOF
-  }
-
-  function _mail-help() {
-cat << EOF
-mail-h:  This help
 
 # mail syntax:
 
@@ -339,12 +333,46 @@ $ mail -r <return_address> -u <sender_email>
   # mail will ask for the recipient address
 
 # ctrl-d to send mail and exit;
+EOF
+  }
+  function _postfix-help) {
+cat << EOF
+postfix-h:  This help
 
+ prl: postfix reload
+pchk: postfix check
+  ps: systemctl status postfix
+ ps@: systemctl tatus postfix@-
+
+
+# sasl password commands:
+
+$ sudo saslpasswd2 -c -u <domain> <username>
+  # Create User
+$ sudo saslpasswd2 -u <domain> <username>
+  # Update password
+$ sudo saslpasswd2 -d <username>@<domain>
+  # Delete user; syntax is different from others!!
+$ sudo sasldblistusers2
+  # List users
+
+
+# Mail queue commands:
+
+mailq: display the mail queue
+# Various mail queue flush commands
+mailq-f1: sudo postsuper -r ALL
+mailq-f2: sudo postqueue -f
+mailq-f3: sudo postfix flush
+mailq-f4: mailq -q
+# Delete mail queue
+mailq-dd: mail delete ALL deferred
+mailq-da: mail delete ALL
 EOF
   }
 
   # Display help for keyboard shorts/aliases; use s-h;
-  function _show_help_kb_aliases() {
+  function _show_shell_help() {
 cat << EOF
  s-h:  This help
 
@@ -370,35 +398,13 @@ show-jc: sudo journalctl -f
   us:  uwsgi satus
  nrl:  nginx reload
   ns:  nginx status
-
- prl: postfix reload
-pchk: postfix check
-  ps: systemctl status postfix
- ps@: systemctl tatus postfix@-
-
-
-# Mail queue commands:
-
-mailq: display the mail queue
-
-mailq-f1: sudo postsuper -r ALL
-mailq-f2: sudo postqueue -f
-mailq-f3: sudo postfix flush
-mailq-f4: mailq -q
-  # Various mail queue flush commands
-
-mailq-dd: mail delete ALL deferred
-mailq-da: mail delete ALL
-
 EOF
   }
 
   # show this help
-  alias s-h=_show_help_kb_aliases
-
-  alias sendmail-h=_sendmail-help
+  alias s-h=_show_shell_help
+  alias postfix-h=_postfix-help
   alias mail-h=_mail-help
-
 
   # sudoedit alias; should start vim in safe sudo mode;
   # alias sv="sudoedit"  # Don't like that it doesn't save until exit;
