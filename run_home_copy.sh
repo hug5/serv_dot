@@ -25,7 +25,7 @@ function copy_to_neofetch() {
     # Then copy the neofetch config.conf file
     mkdir -p ~/.config/neofetch
       # This command won't overwrite or delete if the folder already exists;
-    cp neofetch/config.conf ~/.config/neofetch
+    cp home_folder/neofetch/config.conf ~/.config/neofetch
 }
 
 function doCopy() {
