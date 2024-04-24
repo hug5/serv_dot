@@ -298,7 +298,7 @@
   alias gaa="git add --all && git status && echo '-- all files staged --'"
   alias gca="git commit --amend --no-edit && git status && echo '-- changes committed, amended, no edit --'"
   alias gcm="git commit --message"
-  alias gl="git log -n20 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo 'git log -n20'"
+  alias gl="git log -n15 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo 'git log -n15'"
   alias gb="git branch -v"
   alias gc="git checkout"
 
