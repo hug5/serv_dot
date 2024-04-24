@@ -312,7 +312,7 @@
 cat << EOF
 mail-h: This help
 
-# sendmail syntax:
+## sendmail command:
 
 $ sendmail -f <return_address> <to_recipient>
 > To: alias<to_recipient>
@@ -324,7 +324,7 @@ $ sendmail -f <return_address> <to_recipient>
 > .
 
 
-# mail syntax:
+## mail command:
 
 $ mail <recipient_email> -r <return_address> -u <sender_email>
  # Include recipient directly;
@@ -340,13 +340,15 @@ EOF
 cat << EOF
 postfix-h:  This help
 
+## Postfix aliases:
+
  prl: postfix reload
 pchk: postfix check
   ps: systemctl status postfix
  ps@: systemctl tatus postfix@-
 
 
-# sasl password commands:
+## sasl password commands:
 
 $ sudo saslpasswd2 -c -u <domain> <username>
   # Create User
@@ -358,14 +360,16 @@ $ sudo sasldblistusers2
   # List users
 
 
-# Mail queue commands:
+## Mail queue aliases:
 
 mailq: display the mail queue
+
 # Various mail queue flush commands
 mailq-f1: sudo postsuper -r ALL
 mailq-f2: sudo postqueue -f
 mailq-f3: sudo postfix flush
 mailq-f4: mailq -q
+
 # Delete mail queue
 mailq-dd: mail delete ALL deferred
 mailq-da: mail delete ALL
