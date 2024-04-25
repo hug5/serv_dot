@@ -32,13 +32,17 @@ function doCopy() {
 
     echo "Ctrl-c to Cancel."
     echo -n "Doing copy in 3 seconds... "
+
     for (( n=1; n < 4; n++ )); do
         sleep 1
         echo -n "$n "
     done
+
     sleep 1
+
     echo
     echo "Start..."
+
     sleep 1
 
     copy_to_home
