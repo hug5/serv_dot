@@ -14,8 +14,8 @@ function _install_programs() {
     # See if programs were already installed
     RESULT=$(which pipx)
 
-    # if [[ -z "$RESULT" ]]; then
-    if [[ -n "$RESULT" ]]; then
+    #if [[ -n "$RESULT" ]]; then
+    if [[ -z "$RESULT" ]]; then
 
         # Install some programs:
         echo "Installing programs..."
