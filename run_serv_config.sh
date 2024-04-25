@@ -30,6 +30,7 @@ function _install_programs() {
 
         # Then make additional symlink from /opt/pipx to /root/.local/pipx
         echo "Making symlink from /opt/pipx to /root/.local/pipx ..."
+        sudo mkdir /root/.local
         sudo ln -s /opt/pipx /root/.local/pipx
 
     fi
@@ -78,11 +79,19 @@ function _doStart() {
     _copy_to_root
     _copy_to_neofetch
 
-    echo "Sourcing \$HOME/.bashrc ..."
-    source ~/.bashrc
+    echo "Sourcing ~/.bashrc ..."
+    # source ~/.bashrc
+    # source "$HOME/.bashrc"
+
+    SOURCE_BASHRC="source ~/.bashrc"
+    # IFS= read -rei "$SOURCE_BASHRC" -p "${PS1@P}" SOURCE_BASHRC2
+    eval "$SOURCE_BASHRC"  # run command
+      # Execute arguments as shell command;
+      # See: help eval
 
     #echo "Run 'source ~/.bashrc'"
     echo "Done."
+
     # echo "Copied and ~/.bashrc re-sourced."
 }
 

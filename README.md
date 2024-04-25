@@ -16,7 +16,8 @@ Automation script will:
 ▫ Copy vimrc to /root directory.  
 ▫ Copy neofetch/config.conf to \$HOME/.config/neofetch.  
 
-$ ./run_serv_config.sh  
+
+$ ./run_serv_config.sh
 
 ----------------------------------------------
 
