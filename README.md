@@ -1,6 +1,6 @@
 ### serv_config
 
--------------
+----------------------------------------------
 
 ## Server config files
 
@@ -9,26 +9,27 @@ $ cd serv_config
 
 ### Run script to copy files:
 
-Automation script will copy all files in serv_config/home_folder to your ~/ home folder and .vimrc to your /root folder.
+Automation script will:
+▫ Install basic programs.
+▫ Pipx install trash-cli and setup symlinks.
+▫ Copy configuration files to \$HOME directory.
+▫ Copy vimrc to /root directory.
+▫ Copy neofetch/config.conf to \$HOME/.config/neofetch.
 
-$ ./run_home_copy.sh  
+$ ./run_serv_config.sh  
 
-### Then source your .bashrc:
-
-$ source ~/.bashrc
-
--------------
+----------------------------------------------
 
 ### File Contents:
 
-Files copied to your home folder:
+Files copied to your home directory:
 ```
 .vimrc  
 .gitconfig  
 .bash_hs  
 .bash_aliases  
 ```
-Files copied to your /root folder:
+Files copied to your /root directory:
 ```
 .vimrc  
 ```
