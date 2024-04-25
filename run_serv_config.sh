@@ -19,8 +19,9 @@ function _install_programs() {
 
         # Install some programs:
         echo "Installing programs..."
-        # sudo apt install neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full --dry-run
-        sudo apt install neofetch fzf fd-find htop moreutils ufw rsyslog fail2ban --dry-run
+        sudo apt install neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full
+        #--dry-run
+        #sudo apt install neofetch fzf fd-find htop moreutils ufw rsyslog fail2ban --dry-run
 
         # Install moreutils to get the vidir program;
 
@@ -38,12 +39,12 @@ function _install_programs() {
 
 function _copy_to_home() {
     # Copy hidden filds to home
-    cp home_folder/.* ~/
+    cp home_dir/.* ~/
 }
 
 function _copy_to_root() {
     # Copy the .vimrc file to /root
-    sudo cp home_folder/.vimrc /root/
+    sudo cp home_dir/.vimrc /root/
 }
 
 function _copy_to_neofetch() {
@@ -51,7 +52,7 @@ function _copy_to_neofetch() {
     # Then copy the neofetch config.conf file
     mkdir -p ~/.config/neofetch
       # This command won't overwrite or delete if the folder already exists;
-    cp home_folder/neofetch/config.conf ~/.config/neofetch
+    cp home_dir/neofetch/config.conf ~/.config/neofetch
 }
 
 function _doStart() {
@@ -89,9 +90,9 @@ function _doStart() {
 
 #####################################################################
 
-# List files in home_folder
-# echo "Files in home_folder:"
-# echo $(ls -AF home_folder) | tr [:space:] '\n'
+# List files in home_dir
+# echo "Files in home_dir:"
+# echo $(ls -AF home_dir) | tr [:space:] '\n'
 # echo
 
 # WHO=$(whoami)
