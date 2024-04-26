@@ -301,6 +301,7 @@
   alias gl="git log -n15 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo 'git log -n15'"
   alias gb="git branch -v"
   alias gc="git checkout"
+  alias gpull="git pull"
 
   source /usr/share/bash-completion/completions/git
 

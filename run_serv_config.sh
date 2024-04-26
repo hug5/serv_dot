@@ -1,4 +1,10 @@
 #!/usr/bin/bash
+
+# /usr/bin/env bash
+# /bin/env bash
+# /usr/bin/bash
+# /bin/bash
+
 # // 2024-03-10 Sun 20:42
 
 # This copies config files in home and other directories:
@@ -7,22 +13,33 @@
   # 3) copies neofetch/config.conf to $HOME/.config/neofetch/
 
 
-#################################################################
+#------------------------------------------
+
+
+CONT=
+  # continue operation or not:
+PROGRAMS="neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full"
+  # Applications to install:
+
+
+#------------------------------------------
+
 
 function _install_programs() {
 
     # See if programs were already installed
-    RESULT=$(which pipx)
+    local RESULT=$(which pipx)
+
+    # List of programs to install:
+      # Install moreutils to get the vidir program;
 
     #if [[ -n "$RESULT" ]]; then
     if [[ -z "$RESULT" ]]; then
 
-        # Install some programs:
         echo "Installing programs..."
-        sudo apt install neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full
-        #--dry-run
-
-        # Install moreutils to get the vidir program;
+        sudo apt install $PROGRAMS
+          #--dr-run
+          # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
 
         # Install trash-cli through pipx
         echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
@@ -35,7 +52,6 @@ function _install_programs() {
 
     fi
 }
-
 
 function _copy_to_home() {
     # Copy hidden filds to home
@@ -83,60 +99,70 @@ function _doStart() {
     # source ~/.bashrc
     # source "$HOME/.bashrc"
 
-    SOURCE_BASHRC="source $HOME/.bashrc"
+    # SOURCE_BASHRC="source $HOME/.bashrc"
     # IFS= read -rei "$SOURCE_BASHRC" -p "${PS1@P}" SOURCE_BASHRC2
-    eval "$SOURCE_BASHRC"  # run command
+    # eval "$SOURCE_BASHRC"  # run command
       # Execute arguments as shell command;
       # See: help eval
 
     #echo "Run 'source ~/.bashrc'"
-    echo "Done."
+
+    source ~/.bashrc
 
     # echo "Copied and ~/.bashrc re-sourced."
 }
 
+function _doCheck() {
 
-#####################################################################
-
-# List files in home_dir
-# echo "Files in home_dir:"
-# echo $(ls -AF home_dir) | tr [:space:] '\n'
-# echo
-
-# WHO=$(whoami)
-# if [[ $WHO == "h5" ]]; then
-#     echo "$WHO. Wrong system."
-#     exit
-# fi
+    if [ -z "$PS1" ]; then
+       echo "This script should be sourced."
+       exit
+    fi
 
 
-echo "This script will:"
-RESULT=$(which pipx)
-if [[ -z "$RESULT" ]]; then
-    echo "▫ Install basic programs."
-    echo "▫ Pipx install trash-cli and setup symlinks."
+    echo "This script will:"
+
+    RESULT=$(which pipx)
+    if [[ -z "$RESULT" ]]; then
+        echo "□ Install basic programs: $PROGRAMS"
+        echo "□ Install trash-cli with pipx and setup symlinks."
+    fi
+    echo "□ Copy configuration files to \$HOME directory."
+    echo "□ Copy vimrc to /root directory."
+    echo "□ Copy neofetch/config.conf to \$HOME/.config/neofetch."
+    read -p "Do you want to continue? (Y/n): " CHOICE
+
+    ###
+      # read -p "Setup and copy configuration files to \$HOME folder, .vimrc to /root folder, and neofetch/config.conf to \$HOME/.config/neofetch? (Y/n): " CHOICE
+
+    case "$CHOICE" in
+
+      n|N )
+          echo "Canceled."
+          CONT=false
+          ;;
+      y|Y|* )
+          read -rp "This can't be undone. Press any key to confirm. "
+          CONT=true
+            # -r : fixing backslashes
+            # -p : prompt
+            # https://www.shellcheck.net/wiki/SC2162
+          ;;
+    esac
+}
+
+
+#------------------------------------------
+
+
+_doCheck
+
+if $CONT; then
+    _doStart
 fi
 
-echo "▫ Copy configuration files to \$HOME folder."
-echo "▫ Copy vimrc to /root folder."
-echo "▫ Copy neofetch/config.conf to \$HOME/.config/neofetch."
-read -p "Do you want to continue? (Y/n): " CHOICE
-# read -p "Setup and copy configuration files to \$HOME folder, .vimrc to /root folder, and neofetch/config.conf to \$HOME/.config/neofetch? (Y/n): " CHOICE
-
-case "$CHOICE" in
-
-  n|N )
-      echo "Canceled."
-      exit
-      ;;
-  y|Y|* )
-      read -rp "This can't be undone. Press any key to confirm. "
-        # -r : fixing backslashes
-        # -p : prompt
-        # https://www.shellcheck.net/wiki/SC2162
-      _doStart
-      ;;
-esac
+echo "Done."
 
 
 
+#------------------------------------------

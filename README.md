@@ -7,36 +7,39 @@
 $ git clone https://github.com/hug5/serv_config.git  
 $ cd serv_config
 
-### Run script to copy files:
+### Source script: 
+```
+$ . run_serv_config.sh
 
-Automation script will:  
-▫ Install basic programs.  
-▫ Pipx install trash-cli and setup symlinks.  
-▫ Copy configuration files to \$HOME directory.  
-▫ Copy vimrc to /root directory.  
-▫ Copy neofetch/config.conf to \$HOME/.config/neofetch.  
-
-
-$ ./run_serv_config.sh
+□ Install basic programs:
+neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full
+□ Pipx install trash-cli and setup symlinks.
+□ Copy configuration files to $HOME directory.
+□ Copy vimrc to /root directory.
+□ Copy neofetch/config.conf to $HOME/.config/neofetch.
+Do you want to continue? (Y/n):
+```
 
 ----------------------------------------------
 
-### File Contents:
+### File copied:
 
-Files copied to your home directory:
+$HOME
 ```
 .vimrc  
 .gitconfig  
 .bash_hs  
 .bash_aliases  
 ```
-Files copied to your /root directory:
+/root
 ```
 .vimrc  
 ```
-
+$HOME/.config/neofetch
+```
+config.conf
+```
 .../<git_project>
-    
 Manually copy as needed:
 ```
 .config
