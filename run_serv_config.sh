@@ -18,18 +18,18 @@ function _install_programs() {
     if [[ -z "$RESULT" ]]; then
 
         # Install some programs:
-        echo "Installing programs ..."
+        echo "Installing programs..."
         sudo apt install neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full
         #--dry-run
 
         # Install moreutils to get the vidir program;
 
         # Install trash-cli through pipx
-        echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin ..."
+        echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
         sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
 
         # Then make additional symlink from /opt/pipx to /root/.local/pipx
-        echo "Making symlink from /opt/pipx to /root/.local/pipx ..."
+        echo "Making symlink from /opt/pipx to /root/.local/pipx..."
         sudo mkdir /root/.local
         sudo ln -s /opt/pipx /root/.local/pipx
 
@@ -58,7 +58,7 @@ function _copy_to_neofetch() {
 function _doStart() {
 
     echo "Ctrl-c to Cancel."
-    echo -n "Doing copy in 3 seconds ... "
+    echo -n "Doing copy in 3 seconds... "
 
     for (( n=1; n < 4; n++ )); do
         sleep 1
@@ -74,16 +74,16 @@ function _doStart() {
 
     _install_programs
 
-    echo "Doing copies ..."
+    echo "Doing copies..."
     _copy_to_home
     _copy_to_root
     _copy_to_neofetch
 
-    echo "Sourcing ~/.bashrc ..."
+    echo "Sourcing ~/.bashrc..."
     # source ~/.bashrc
     # source "$HOME/.bashrc"
 
-    SOURCE_BASHRC="source ~/.bashrc"
+    SOURCE_BASHRC="source $HOME/.bashrc"
     # IFS= read -rei "$SOURCE_BASHRC" -p "${PS1@P}" SOURCE_BASHRC2
     eval "$SOURCE_BASHRC"  # run command
       # Execute arguments as shell command;
