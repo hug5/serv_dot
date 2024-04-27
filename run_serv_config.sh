@@ -19,13 +19,29 @@
 CONT=
   # continue operation or not:
 PROGRAMS="neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full"
-  # Applications to install:
+
+PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
+
 
 
 #------------------------------------------
+function _install_programs_postfix() {
 
+    read -rp "Do you want to install Postfix? (Y/n): " CHOICE
+    # Why -r? https://www.shellcheck.net/wiki/SC2162
 
-function _install_programs() {
+    case "$CHOICE" in
+
+      n|N )
+          ;;
+      y|Y|* )
+          sudo apt install $PROGRAMS_POSTFIX -y
+          ;;
+    esac
+
+}
+
+function _install_programs_basic() {
 
     # See if programs were already installed
     local RESULT=$(which pipx)
@@ -36,8 +52,8 @@ function _install_programs() {
     #if [[ -n "$RESULT" ]]; then
     if [[ -z "$RESULT" ]]; then
 
-        echo "Installing programs..."
-        sudo apt install $PROGRAMS
+        echo "Installing basic applications..."
+        sudo apt install $PROGRAMS -y
           #--dr-run
           # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
 
@@ -88,9 +104,10 @@ function _doStart() {
 
     sleep 1
 
-    _install_programs
+    _install_programs_basic
+    _install_programs_postfix
 
-    echo "Doing copies..."
+    echo "Making config copies..."
     _copy_to_home
     _copy_to_root
     _copy_to_neofetch
