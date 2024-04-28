@@ -29,7 +29,6 @@ function _install_programs_postfix() {
 
     read -rp "Do you want to install Postfix? (Y/n): " CHOICE
     # Why -r? https://www.shellcheck.net/wiki/SC2162
-
     case "$CHOICE" in
 
       n|N )
