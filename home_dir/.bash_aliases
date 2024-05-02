@@ -35,6 +35,7 @@
   export SUDO_EDITOR=/usr/bin/vim.basic
 
   alias hs='. ~/.bash_hs'
+  alias vif='~/.bash_vif'
 
   # Enable zoxide in bash
   eval "$(zoxide init bash)"
@@ -270,15 +271,18 @@
 
   # python alias to start virtual environment
   alias vactivate=". ./.venv/bin/activate"
-  alias veactivate=vactivate
+  alias vact=vactivate
+  alias dact=deactivate
 
 #------------------------------------------------------------------
 ### Search aliases
 #------------------------------------------------------------------
 
-  alias fdgo='cd "$(dirname "$(fd | fzf)")"'
-  alias fdgod='cd "$(fd -t d | fzf)"'
-  alias fd='fdfind --hidden'
+  alias cgo='cd "$(dirname "$(fd | fzf)")"'
+  alias cgod='cd "$(fd -t d | fzf)"'
+  alias fd='fdfind --hidden --exclude .git'
+
+  
 
 #------------------------------------------------------------------
 ### Ranger

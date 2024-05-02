@@ -35,6 +35,7 @@ function _install_programs_postfix() {
           ;;
       y|Y|* )
           sudo apt install $PROGRAMS_POSTFIX -y
+          echo "Done."
           ;;
     esac
 
@@ -55,6 +56,7 @@ function _install_programs_basic() {
         sudo apt install $PROGRAMS -y
           #--dr-run
           # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
+        echo "Done."
 
         # Install trash-cli through pipx
         echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
@@ -64,6 +66,8 @@ function _install_programs_basic() {
         echo "Making symlink from /opt/pipx to /root/.local/pipx..."
         sudo mkdir /root/.local
         sudo ln -s /opt/pipx /root/.local/pipx
+
+        echo "Done."
 
     fi
 }
@@ -124,6 +128,7 @@ function _doStart() {
     #echo "Run 'source ~/.bashrc'"
 
     source ~/.bashrc
+    echo "Done."
 
     # echo "Copied and ~/.bashrc re-sourced."
 }
@@ -176,8 +181,6 @@ _doCheck
 if $CONT; then
     _doStart
 fi
-
-echo "Done."
 
 
 
