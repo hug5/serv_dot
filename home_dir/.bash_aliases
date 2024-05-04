@@ -37,6 +37,10 @@
   alias hs='. ~/.bash_hs'
   alias vif='~/.bash_vif'
 
+  alias cgo='~/.bash_cgo'
+  alias cgof='~/.bash_cgo -f'
+
+
   # Enable zoxide in bash
   eval "$(zoxide init bash)"
 
@@ -278,8 +282,8 @@
 ### Search aliases
 #------------------------------------------------------------------
 
-  alias cgo='cd "$(dirname "$(fd | fzf)")"'
-  alias cgod='cd "$(fd -t d | fzf)"'
+  # alias cgo='cd "$(dirname "$(fd | fzf)")"'
+  # alias cgod='cd "$(fd -t d | fzf)"'
   alias fd='fdfind --hidden --exclude .git'
 
   

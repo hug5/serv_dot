@@ -39,11 +39,31 @@ EOF
 exit 0;
 }
 
+alias cgo='cd "$(dirname "$(fd | fzf)")"'
+alias cgod='cd "$(fd -t d | fzf)"'
+
+# Rename fdfind to fd
+alias fd='fdfind --hidden --exclude .git'
+
+
+
 function _vif() {
 
     local file_result=''
 
-    file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='head -n50 {}')
+    # file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='head -n50 {}')
+    # file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='bat --theme=zenburn --color=auto --line-range=:100 {}')
+    local ISBat=''
+    local ISBatCAT=''
+    ISBAT=$(which bat)
+    ISBATCAT=$(which batcat)
+    if [[ -n $ISBAT ]]; then
+      file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='bat --color=always --line-range=:100 {}')
+    elif [[ -n $ISBATCAT ]]; then
+      file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='batcat --color=always --line-range=:100 {}')
+    else
+      file_result=$($fd -tf . "$START_DIR" | fzf $STYLE "$OPTION" --preview='head -n100 {}')
+    fi
       # The {} characters can't be put into a variable, it seems;
       # $STYLE is not quoted, but $OPTION is; weird error and quirks;
       # Note: In case we forget, what we're doing here is running fd search for everything
@@ -71,14 +91,17 @@ elif [[ ! -d "$START_DIR" ]]; then
     exit
 fi
   # Check the START_DIR variable;
-  # If empty, then assign .; Do this because get error otherwise
+  # If empty, then assign .
+  # Do this because get error otherwise
   # if pass empty string; See note below about the error;
   # Also check if the directory is valid;
 
-# echo $START_DIR
-# exit
+
 # Run
 _vif
+
+
+
 
 
 #--------------------------------------------------------
