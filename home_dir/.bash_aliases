@@ -34,15 +34,18 @@
   export EDITOR=/usr/bin/vim.basic
   export SUDO_EDITOR=/usr/bin/vim.basic
 
+  alias sbrc='source ~/.bashrc'
+    # source .bashrc shortcut
+
   alias hs='. ~/.bash_hs'
   alias vif='~/.bash_vif'
 
-  alias cgo='~/.bash_cgo'
-  alias cgof='~/.bash_cgo -f'
+  alias fgo='~/.bash_cgo'
+  alias fgof='~/.bash_cgo -f'
 
 
-  # Enable zoxide in bash
   eval "$(zoxide init bash)"
+    # Enable zoxide in bash
 
 #------------------------------------------------------------------
 ### ls aliases
