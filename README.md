@@ -26,10 +26,12 @@ Do you want to continue? (Y/n):
 
 $HOME
 ```
-.vimrc  
-.gitconfig  
-.bash_hs  
 .bash_aliases  
+.bash_fgo
+.bash_hs  
+.bash_vif
+.gitconfig  
+.vimrc  
 ```
 /root
 ```
