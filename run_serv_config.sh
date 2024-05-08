@@ -18,6 +18,7 @@
 
 CONT=
   # continue operation or not:
+
 PROGRAMS="neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full"
 
 PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
@@ -27,24 +28,37 @@ PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-m
 #------------------------------------------
 function _install_programs_postfix() {
 
-    read -rp "Do you want to install Postfix? (Y/n): " CHOICE
-    # Why -r? https://www.shellcheck.net/wiki/SC2162
-    case "$CHOICE" in
+    local RESULT
+    # RESULT=$(which pipx)
+    RESULT=$(hash postfix)
 
-      n|N )
-          ;;
-      y|Y|* )
-          sudo apt install $PROGRAMS_POSTFIX -y
-          echo "Done."
-          ;;
-    esac
+    if [[ -z "$RESULT" ]]; then
+
+        read -rp "Do you want to install Postfix? (Y/n): " CHOICE
+        # Why -r? https://www.shellcheck.net/wiki/SC2162
+        case "$CHOICE" in
+
+          n|N )
+              ;;
+          y|Y|* )
+              sudo apt install $PROGRAMS_POSTFIX -y
+              echo "Done."
+              ;;
+        esac
+
+    fi
 
 }
 
 function _install_programs_basic() {
 
     # See if programs were already installed
-    local RESULT=$(which pipx)
+    local RESULT
+    # RESULT=$(which pipx)
+    RESULT=$(hash pipx)
+      # Rather than 'which' command, lsp reommends:
+      # command -v pipx
+      # hash pipx
 
     # List of programs to install:
       # Install moreutils to get the vidir program;
