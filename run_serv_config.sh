@@ -30,7 +30,9 @@ function _install_programs_postfix() {
 
     local RESULT
     # RESULT=$(which pipx)
-    RESULT=$(hash postfix)
+    RESULT=$(whereis postfix)
+    # Can't use which, hash or command -v here because postfix
+    # is not a command but a program!
 
     if [[ -z "$RESULT" ]]; then
 
@@ -55,10 +57,11 @@ function _install_programs_basic() {
     # See if programs were already installed
     local RESULT
     # RESULT=$(which pipx)
-    RESULT=$(hash pipx)
+    RESULT=$(command -v pipx)
       # Rather than 'which' command, lsp reommends:
       # command -v pipx
       # hash pipx
+      # has doesn't necessarily seem to work??!
 
     # List of programs to install:
       # Install moreutils to get the vidir program;

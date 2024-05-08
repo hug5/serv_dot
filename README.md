@@ -4,7 +4,7 @@
 
 ## Server config files
 
-$ git clone https://github.com/hug5/serv_config.git  
+$ git clone https://github.com/hug5/serv_config.git --depth 1   
 $ cd serv_config
 
 ### Source script: 

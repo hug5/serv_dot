@@ -40,8 +40,8 @@
   alias hs='. ~/.bash_hs'
   alias vif='~/.bash_vif'
 
-  alias fgo='~/.bash_cgo'
-  alias fgof='~/.bash_cgo -f'
+  alias fgo='. ~/.bash_fgo'
+  alias fgof='. ~/.bash_fgo -f'
 
 
   eval "$(zoxide init bash)"
@@ -309,7 +309,7 @@
   alias gaa="git add --all && git status && echo '-- all files staged --'"
   alias gca="git commit --amend --no-edit && git status && echo '-- changes committed, amended, no edit --'"
   alias gcm="git commit --message"
-  alias gl="git log -n15 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo 'git log -n15'"
+  alias gl="git log -n10 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo '[git log -n10]'"
   alias gb="git branch -v"
   alias gc="git checkout"
   alias gpull="git pull"
