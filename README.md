@@ -31,6 +31,7 @@ $HOME
 .bash_hs  
 .bash_vif
 .gitconfig  
+.gitignore_global
 .vimrc  
 ```
 /root
@@ -41,8 +42,4 @@ $HOME/.config/neofetch
 ```
 config.conf
 ```
-.../<git_project>
-Manually copy as needed:
-```
-.config
-```
+

@@ -1,0 +1,14 @@
+*bak
+*xxx*
+*.bundle
+*.sublime-workspace
+*.sublime-project
+*~
+.gitattributes
+.gitignore
+.git
+*.swp
+.venv
+venv
+*copy*
+*archive*
