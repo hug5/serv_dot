@@ -39,6 +39,7 @@
 
   alias hs='. ~/.bash_hs'
   alias vif='~/.bash_vif'
+  alias svif='sudo ~/.bash_vif'
 
   alias fgo='. ~/.bash_fgo'
   alias fgof='. ~/.bash_fgo -f'
