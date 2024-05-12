@@ -1,15 +1,14 @@
-### serv_config
+### serv_dot
 
 ----------------------------------------------
 
-## Server config files
+## Server dot files
 
-$ git clone https://github.com/hug5/serv_config.git --depth 1   
-$ cd serv_config
+$ git clone https://github.com/hug5/serv_dot.git --depth 1 && cd serv_dot 
 
 ### Source script: 
 ```
-$ . run_serv_config.sh
+$ . run_serv_dot.sh
 
 □ Install basic programs:
 neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full
