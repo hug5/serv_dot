@@ -44,6 +44,15 @@
   alias fgo='. ~/.bash_fgo'
   alias fgof='. ~/.bash_fgo -f'
 
+  alias bat='batcat'
+
+
+  alias bat='batcat'
+  export BAT_THEME=zenburn
+
+  alias ranger=". ranger"
+  export RANGER_LOAD_DEFAULT_RC=FALSE
+  export RANGER_DEVICONS_SEPARATOR='  '
 
   eval "$(zoxide init bash)"
     # Enable zoxide in bash

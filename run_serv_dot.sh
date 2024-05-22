@@ -19,7 +19,7 @@
 CONT=
   # continue operation or not:
 
-PROGRAMS="neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full"
+PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full"
 
 PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
 
@@ -104,8 +104,16 @@ function _copy_to_neofetch() {
     # Then copy the neofetch config.conf file
     mkdir -p ~/.config/neofetch
       # This command won't overwrite or delete if the folder already exists;
-    cp home_dir/neofetch/config.conf ~/.config/neofetch
+    cp home_dir/neofetch/* ~/.config/neofetch
 }
+
+function _copy_to_ranger() {
+    mkdir -p ~/.config/ranger
+      # This command won't overwrite or delete if the folder already exists;
+    cp home_dir/ranger/* ~/.config/ranger
+
+}
+
 
 function _doStart() {
 
@@ -131,6 +139,7 @@ function _doStart() {
     _copy_to_home
     _copy_to_root
     _copy_to_neofetch
+    _copy_to_ranger
 
     echo "Sourcing ~/.bashrc..."
     # source ~/.bashrc
