@@ -57,11 +57,13 @@ function _install_programs_basic() {
     # See if programs were already installed
     local RESULT
     # RESULT=$(which pipx)
-    RESULT=$(command -v pipx)
+    # RESULT=$(command -v pipx)
       # Rather than 'which' command, lsp reommends:
       # command -v pipx
       # hash pipx
       # has doesn't necessarily seem to work??!
+    RESULT=''
+      # Problem if adding new programs to the list; so maybe just reinstall everything; won't reinstall if already installed;
 
     # List of programs to install:
       # Install moreutils to get the vidir program;
@@ -82,6 +84,7 @@ function _install_programs_basic() {
         # Then make additional symlink from /opt/pipx to /root/.local/pipx
         echo "Making symlink from /opt/pipx to /root/.local/pipx..."
         sudo mkdir /root/.local
+        sudo rm /root/.local/pipx
         sudo ln -s /opt/pipx /root/.local/pipx
 
         echo "Done."
@@ -128,8 +131,6 @@ function _doStart() {
         sleep 1
         echo -n "$n "
     done
-
-    sleep 1
 
     echo
     echo "Start..."
@@ -181,6 +182,7 @@ function _doCheck() {
     echo "□ Copy configuration files to \$HOME directory."
     echo "□ Copy vimrc to /root directory."
     echo "□ Copy neofetch/config.conf to \$HOME/.config/neofetch."
+    echo "□ Copy ranger conf files to \$HOME/.config/ranger."
     read -p "Do you want to continue? (Y/n): " CHOICE
 
     ###
