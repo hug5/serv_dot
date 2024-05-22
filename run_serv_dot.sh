@@ -112,6 +112,10 @@ function _copy_to_ranger() {
       # This command won't overwrite or delete if the folder already exists;
     cp home_dir/ranger/* ~/.config/ranger
 
+    # delete existing, if any; clone devicons
+    rm -rf ~/.config/ranger/plugins
+    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
 }
 
 
