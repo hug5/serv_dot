@@ -422,7 +422,9 @@ show-jc: sudo journalctl -f
   f5:  fg 5
 
  urs:  uwsgi restart
-  us:  uwsgi satus
+ url:  uwsgi touch file
+  us:  uwsgi status
+
  nrl:  nginx reload
   ns:  nginx status
 EOF
@@ -459,6 +461,7 @@ EOF
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
+  alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
