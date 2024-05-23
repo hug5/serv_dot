@@ -461,7 +461,8 @@ EOF
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
-  alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
+  # alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
+  alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
