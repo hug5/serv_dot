@@ -370,6 +370,16 @@ pchk: postfix check
  ps@: systemctl tatus postfix@-
 
 
+## Postfix hash commands:
+
+$ sudo postmap -F hash:tls_server_sni_maps
+  # Only this file should use this syntax
+$ sudo postmap hash:smtpd_sender_login_maps
+  # All other files use this syntax
+$ postmap-hash
+  # alias to hash ALL files
+
+
 ## sasl password commands:
 
 $ sudo saslpasswd2 -c -u <domain> <username>
@@ -475,6 +485,8 @@ EOF
   alias pchk="sudo postfix check"
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
+
+  alias postmap-hash="sudo postmap hash:sender_dep_relay_maps && sudo postmap hash:smtpd_sender_login_maps && sudo postmap hash:smtp_sasl_passwd_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postmap hash:virtual_alias_domains && sudo postmap hash:virtual_alias_maps"
 
   # postfix mail queue commands:
   # mailq
