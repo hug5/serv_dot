@@ -414,6 +414,7 @@ cat << EOF
  s-h:  This help
 
   sv:  sudo vim
+
   ss:  sudo systemctl [command] [service]
 ssrl:  sudo systemctl reload [service]
 ssrs:  sudo systemctl restart [service]
@@ -437,6 +438,10 @@ show-jc: sudo journalctl -f
 
  nrl:  nginx reload
   ns:  nginx status
+
+ frl:  php8.2 reload
+ frs:  php8.2 restart
+  fs:  php8.2 status
 EOF
   }
 
@@ -468,6 +473,7 @@ EOF
   alias f4="fg 4"
   alias f5="fg 5"
   alias f6="fg 6"
+  alias f7="fg 7"
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
@@ -479,6 +485,11 @@ EOF
   # nginx
   alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
   alias ns="sudo systemctl status nginx"
+
+  # php8.2-fpm
+  alias frl="sudo systemctl reload php8.2-fpm && echo 'php8.2-fpm reloaded'"
+  alias frs="sudo systemctl restart php8.2-fpm && echo 'php8.2-fpm restarted'"
+  alias fs="sudo systemctl status php8.2-fpm"
 
   # postfix
   alias prl="sudo postfix reload"
