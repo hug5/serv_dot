@@ -45,9 +45,6 @@
   alias fgof='. ~/.bash_fgo -f'
 
   alias bat='batcat'
-
-
-  alias bat='batcat'
   export BAT_THEME=zenburn
 
   alias ranger=". ranger"
