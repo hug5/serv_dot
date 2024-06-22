@@ -417,28 +417,25 @@ ssrl:  sudo systemctl reload [service]
 ssrs:  sudo systemctl restart [service]
  sss:  sudo systemctl status [service]
 
-show-sl: sudo tail -n30 /var/log/syslog -f
-show-ml: sudo tail -n30 /var/log/mail.log -f
-show-jc: sudo journalctl -f
+show-sl:  sudo tail -n30 /var/log/syslog -f
+show-ml:  sudo tail -n30 /var/log/mail.log -f
+show-jc:  sudo journalctl -f
 
-   j:  jobs
-   f:  fg
-  f1:  fg 1
-  f2:  fg 2
-  f3:  fg 3
-  f4:  fg 4
-  f5:  fg 5
+      j:  jobs
+  jkill:  kill all jobs
+      f:  fg
+   f1-N:  fg 1... fg N
 
- urs:  uwsgi restart
- url:  uwsgi touch file
-  us:  uwsgi status
+    urs:  uwsgi restart
+    url:  uwsgi touch file
+     us:  uwsgi status
 
- nrl:  nginx reload
-  ns:  nginx status
+    nrl:  nginx reload
+     ns:  nginx status
 
- frl:  php8.2 reload
- frs:  php8.2 restart
-  fs:  php8.2 status
+    frl:  php8.2 reload
+    frs:  php8.2 restart
+     fs:  php8.2 status
 EOF
   }
 
@@ -463,6 +460,7 @@ EOF
 
   # Jobs aliases
   alias j="jobs -l"
+  alias jkill='kill $(jobs -p)'
   alias f="fg"
   alias f1="fg 1"
   alias f2="fg 2"
@@ -471,6 +469,7 @@ EOF
   alias f5="fg 5"
   alias f6="fg 6"
   alias f7="fg 7"
+  alias f8="fg 8"
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
