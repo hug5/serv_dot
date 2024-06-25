@@ -417,9 +417,9 @@ ssrl:  sudo systemctl reload [service]
 ssrs:  sudo systemctl restart [service]
  sss:  sudo systemctl status [service]
 
-show-sl:  sudo tail -n30 /var/log/syslog -f
-show-ml:  sudo tail -n30 /var/log/mail.log -f
-show-jc:  sudo journalctl -f
+ mon-sl:  sudo tail -n30 /var/log/syslog -f
+ mon-ml:  sudo tail -n30 /var/log/mail.log -f
+ mon-jc:  sudo journalctl -f
 
       j:  jobs
   jkill:  kill all jobs
@@ -454,9 +454,9 @@ EOF
   alias ssrs="sudo systemctl restart"
   alias sss="sudo systemctl status"
 
-  alias show-sl="sudo tail -n30 /var/log/syslog -f"
-  alias show-jc="sudo journalctl -f"
-  alias show-ml="sudo tail -n30 /var/log/mail.log -f"
+  alias mon-sl="sudo tail -n30 /var/log/syslog -f"
+  alias mon-jc="sudo journalctl -f"
+  alias mon-ml="sudo tail -n30 /var/log/mail.log -f"
 
   # Jobs aliases
   alias j="jobs -l"
