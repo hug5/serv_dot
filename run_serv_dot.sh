@@ -128,14 +128,14 @@ function _doStart() {
     echo -n "Doing copy in 3 seconds... "
 
     for (( n=1; n < 4; n++ )); do
-        sleep 1
         echo -n "$n "
+        sleep 1
     done
 
     echo
     echo "Start..."
 
-    sleep 1
+    # sleep 1
 
     _install_programs_basic
     _install_programs_postfix

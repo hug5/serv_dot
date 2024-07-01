@@ -321,6 +321,12 @@
   alias gc="git checkout"
   alias gpull="git pull"
 
+  alias gpull1="git pull --depth 1"
+  alias gpull2="git pull --depth 2"
+  alias gpull3="git pull --depth 3"
+  alias gpull4="git pull --depth 4"
+  alias gpull5="git pull --depth 5"
+
   source /usr/share/bash-completion/completions/git
 
 #------------------------------------------------------------------
@@ -460,7 +466,8 @@ EOF
 
   # Jobs aliases
   alias j="jobs -l"
-  alias jkill='kill $(jobs -p)'
+  # alias jkill='kill $(jobs -p) &>/dev/null; f1 &>/dev/null; f2 &>/dev/null; f3 &>/dev/null; f4 &>/dev/null; f5 &>/dev/null; f6 &>/dev/null; f7 &>/dev/null; f8 &>/dev/null'
+  alias jkill='kill $(jobs -p); sleep 1; f1;f2;f3;f4;f5;f6;f7;f8'
   alias f="fg"
   alias f1="fg 1"
   alias f2="fg 2"
