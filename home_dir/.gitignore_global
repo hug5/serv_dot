@@ -12,9 +12,11 @@
 *~
 .git
 .gitattributes
+.gitignore
 .venv
 __pycache__
 archv
 cache/*
 NOTES
 venv
+adminer.php
