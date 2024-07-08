@@ -437,7 +437,9 @@ ssrs:  sudo systemctl restart [service]
      us:  uwsgi status
 
     nrl:  nginx reload
+    nrs:  nginx restart
      ns:  nginx status
+     nt:  nginx test configuration
 
     frl:  php8.2 reload
     frs:  php8.2 restart
@@ -487,7 +489,9 @@ EOF
 
   # nginx
   alias nrl="sudo systemctl reload nginx && echo 'nginx reloaded'"
+  alias nrs="sudo systemctl restart nginx && echo 'nginx restarted'"
   alias ns="sudo systemctl status nginx"
+  alias nt="sudo nginx -t"
 
   # php8.2-fpm
   alias frl="sudo systemctl reload php8.2-fpm && echo 'php8.2-fpm reloaded'"
