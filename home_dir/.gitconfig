@@ -35,6 +35,18 @@
     # Also add gaa="add --all" alias in .bash_options;
     # so can do either g aa, or gaa
 
+  aacm = commit -am
+    # stage all + commit + message
+    # This adds/stages all changes and commit with message
+  #aacmm = commit -am wip
+  #aacmm = !git add --all &&  git commit -am wip
+  aacmm = !git add --all && git commit -am wip
+    # stage all + commit + message 'wip'
+
+  aaca = !git add --all && git commit --amend --no-edit
+    # Combine gaa + gca; add all + commit amend, no edit;
+
+
   # Going to just remove --all options; the acronyms get too unwiedly/confuing with it;
   # m = message, a = amend
   cm = commit --message
@@ -45,7 +57,6 @@
   cma = commit --amend --message
 
   c = checkout
-
 
   stl = stash list
     # stash list
@@ -60,8 +71,6 @@
     # remove all stash
 
 
-
-
   cfl = config --list
     # all config settings
 	cfa = config --get-regexp ^alias
@@ -69,6 +78,8 @@
 
   p = push
   pf = push --force
+
+  pullx = pull --depth 5
 
 [help]
 	autocorrect = 0   # Disable it; was 50;

@@ -315,17 +315,13 @@
   alias gs="git status"
   alias gaa="git add --all && git status && echo '-- all files staged --'"
   alias gca="git commit --amend --no-edit && git status && echo '-- changes committed, amended, no edit --'"
+  alias gaaca="git add --all && git commit --amend --no-edit"
   alias gcm="git commit --message"
   alias gl="git log -n10 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo '[git log -n10]'"
   alias gb="git branch -v"
   alias gc="git checkout"
   alias gpull="git pull"
-
-  alias gpull1="git pull --depth 1"
-  alias gpull2="git pull --depth 2"
-  alias gpull3="git pull --depth 3"
-  alias gpull4="git pull --depth 4"
-  alias gpull5="git pull --depth 5"
+  alias gpullx="git pull --depth 5"
 
   source /usr/share/bash-completion/completions/git
 
