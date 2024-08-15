@@ -82,7 +82,7 @@
 
   ## Sorting aliases
   # Using Ranger keybindings
-  
+
   # By default, sorting is alphabetial;
 
   # Sort alphabetical; alphabetical order;
@@ -94,8 +94,8 @@
   alias llN='ls -alFhr'
   alias laN='ls -AFr'
 
-  
-  
+
+
 
   # Sort by modification time; -t switch
   alias llm='ls -alFht'
@@ -131,7 +131,7 @@
   # sort reverse : -r
 
 
-  ## Specialized Listing Commands 
+  ## Specialized Listing Commands
 
   # List hidden files only:
   # This command is intended to list just hidden files
@@ -159,6 +159,7 @@
   alias lD='ls -dr */'
   alias llD='ls -lAFr | grep "^d"'
 
+  alias lll='ll | grep ^l'       # begnning with l, all links;
 
 #------------------------------------------------------------------
 ### Navigation + CD Shortcuts
@@ -194,7 +195,7 @@
   # tmux kill session and exit terminal
   alias qqq='tmux kill-session'
 
-  
+
   # For other custom aliases, see .bash_aliases
 
   alias rmdir='rmdir -v'
@@ -296,7 +297,7 @@
   # alias cgod='cd "$(fd -t d | fzf)"'
   alias fd='fdfind --hidden --exclude .git'
 
-  
+
 
 #------------------------------------------------------------------
 ### Ranger
