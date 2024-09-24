@@ -16,17 +16,17 @@
 #------------------------------------------
 
 
-CONT=
+declare CONT=false
   # continue operation or not:
 
-PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
+declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
 
-PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
+declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
 
 
 
 #------------------------------------------
-function _install_programs_postfix() {
+function install_programs_postfix() {
 
     local RESULT
     # RESULT=$(which pipx)
@@ -52,57 +52,66 @@ function _install_programs_postfix() {
 
 }
 
-function _install_programs_basic() {
+function install_programs_basic() {
 
     # See if programs were already installed
-    local RESULT
+    # local RESULT
     # RESULT=$(which pipx)
     # RESULT=$(command -v pipx)
       # Rather than 'which' command, lsp reommends:
       # command -v pipx
       # hash pipx
       # has doesn't necessarily seem to work??!
-    RESULT=''
+    # RESULT=''
       # Problem if adding new programs to the list; so maybe just reinstall everything; won't reinstall if already installed;
 
     # List of programs to install:
       # Install moreutils to get the vidir program;
 
-    #if [[ -n "$RESULT" ]]; then
-    if [[ -z "$RESULT" ]]; then
+    # if [[ -z "$RESULT" ]]; then
 
-        echo "Installing basic applications..."
-        sudo apt install $PROGRAMS -y
-          #--dr-run
-          # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
-        echo "Done."
+    #-------------------------------------------------------
+    ## Install basic programs
 
-        # Install trash-cli through pipx
-        echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
-        sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
+    echo "Installing basic applications..."
+    sudo apt install $PROGRAMS -y
+      #--dr-run
+      # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
+    echo "Done."
 
-        # Then make additional symlink from /opt/pipx to /root/.local/pipx
-        echo "Making symlink from /opt/pipx to /root/.local/pipx..."
-        sudo mkdir /root/.local
-        sudo rm /root/.local/pipx
-        sudo ln -s /opt/pipx /root/.local/pipx
+    #-------------------------------------------------------
+    ## Install trash-cli
 
-        echo "Done."
+    # Install trash-cli through pipx
+    # echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
+    # sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
 
-    fi
+    # # Then make additional symlink from /opt/pipx to /root/.local/pipx
+    # echo "Making symlink from /opt/pipx to /root/.local/pipx..."
+    # sudo mkdir /root/.local
+    # sudo rm /root/.local/pipx
+    # sudo ln -s /opt/pipx /root/.local/pipx
+
+    # pipx install trash-cli with --global flag;
+    echo "Pipx installing trash-cli..."
+    sudo pipx install trash-cli --global
+
+    echo "Done."
+
+    # fi
 }
 
-function _copy_to_home() {
+function copy_to_home() {
     # Copy hidden filds to home
     cp home_dir/.* ~/
 }
 
-function _copy_to_root() {
+function copy_to_root() {
     # Copy the .vimrc file to /root
     sudo cp home_dir/.vimrc /root/
 }
 
-function _copy_to_neofetch() {
+function copy_to_neofetch() {
     # if not exist, then create neofetch folder;
     # Then copy the neofetch config.conf file
     mkdir -p ~/.config/neofetch
@@ -110,7 +119,7 @@ function _copy_to_neofetch() {
     cp home_dir/neofetch/* ~/.config/neofetch
 }
 
-function _copy_to_ranger() {
+function copy_to_ranger() {
     mkdir -p ~/.config/ranger
       # This command won't overwrite or delete if the folder already exists;
     cp home_dir/ranger/* ~/.config/ranger
@@ -122,7 +131,7 @@ function _copy_to_ranger() {
 }
 
 
-function _doStart() {
+function doStart() {
 
     echo "Ctrl-c to Cancel."
     echo -n "Doing copy in 3 seconds... "
@@ -137,14 +146,14 @@ function _doStart() {
 
     # sleep 1
 
-    _install_programs_basic
-    _install_programs_postfix
+    install_programs_basic
+    install_programs_postfix
 
     echo "Making config copies..."
-    _copy_to_home
-    _copy_to_root
-    _copy_to_neofetch
-    _copy_to_ranger
+    copy_to_home
+    copy_to_root
+    copy_to_neofetch
+    copy_to_ranger
 
     echo "Sourcing ~/.bashrc..."
     # source ~/.bashrc
@@ -164,7 +173,7 @@ function _doStart() {
     # echo "Copied and ~/.bashrc re-sourced."
 }
 
-function _doCheck() {
+function doCheck() {
 
     if [ -z "$PS1" ]; then
        echo "This script should be sourced."
@@ -174,15 +183,21 @@ function _doCheck() {
 
     echo "This script will:"
 
-    RESULT=$(which pipx)
-    if [[ -z "$RESULT" ]]; then
-        echo "□ Install basic programs: $PROGRAMS"
-        echo "□ Install trash-cli with pipx and setup symlinks."
-    fi
+    # I guess I'm only installing programs if not pipx
+    # RESULT=$(which pipx)
+    # if [[ -z "$RESULT" ]]; then
+        # echo "□ Install basic programs: $PROGRAMS"
+        # echo "□ Install trash-cli with pipx and setup symlinks."
+    # fi
+
+    # To keep it simple, just going to issue command to install all programs; if already installed, then apt should skip it;
+    echo "□ Install basic programs: $PROGRAMS"
+    echo "□ Install trash-cli with pipx and setup symlinks."
     echo "□ Copy configuration files to \$HOME directory."
     echo "□ Copy vimrc to /root directory."
     echo "□ Copy neofetch/config.conf to \$HOME/.config/neofetch."
     echo "□ Copy ranger conf files to \$HOME/.config/ranger."
+    echo "□ You will also be prompted later about installing Postfix."
     read -p "Do you want to continue? (Y/n): " CHOICE
 
     ###
@@ -208,12 +223,11 @@ function _doCheck() {
 #------------------------------------------
 
 
-_doCheck
+doCheck
 
 if $CONT; then
-    _doStart
+    doStart
 fi
-
 
 
 #------------------------------------------
