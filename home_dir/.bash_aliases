@@ -420,9 +420,9 @@ ssrl:  sudo systemctl reload [service]
 ssrs:  sudo systemctl restart [service]
  sss:  sudo systemctl status [service]
 
- mon-sl:  sudo tail -n30 /var/log/syslog -f
- mon-ml:  sudo tail -n30 /var/log/mail.log -f
- mon-jc:  sudo journalctl -f
+ tail-sys:  sudo tail -n30 /var/log/syslog -f
+ tail-mail:  sudo tail -n30 /var/log/mail.log -f
+ tail-jc:  sudo journalctl -f
 
       j:  jobs
   jkill:  kill all jobs
@@ -480,7 +480,32 @@ EOF
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
   # alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
-  alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
+  # alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
+
+  # Want to make the uswgi reload file independent of projects;
+  # touching shouldn't reload all projects;
+  # Then in vassals file, set:
+  # touch-reload = /srv/http/ww2.inkonpages/reload-uwsgi
+  function reload_uwsgi() {
+      local dir1
+      local dir2
+      local path1
+      local path2
+      dir1=$(echo "$(pwd)" | cut -f 2 -d '/')
+      dir2=$(echo "$(pwd)" | cut -f 3 -d '/')
+      if [[ $dir1 != "srv" || $dir2 != "http" ]]; then
+          echo "Should run command in a project folder: /srv/http/project/"
+      else
+          echo 'touch project reload-uwsgi file'
+          path1=$(echo "$(pwd)" | cut -f 1,2,3,4 -d '/')
+          path2=${path1}'/reload-uwsgi'
+          touch $path2
+          echo 'reload-uwsgi touched.'
+      fi
+  }
+  alias url=reload_uwsgi
+  # Rename the old command; keep for now;
+  alias url2="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
