@@ -496,11 +496,11 @@ EOF
       if [[ $dir1 != "srv" || $dir2 != "http" ]]; then
           echo "Should run command in a project folder: /srv/http/project/"
       else
-          echo 'touch project reload-uwsgi file'
+          echo 'Reload uwsgi-emperor server.'
           path1=$(echo "$(pwd)" | cut -f 1,2,3,4 -d '/')
           path2=${path1}'/reload-uwsgi'
           touch $path2
-          echo 'reload-uwsgi touched.'
+          echo '♛ uwsgi-emperor server reloaded.'
       fi
   }
   alias url=reload_uwsgi
