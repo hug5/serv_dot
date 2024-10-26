@@ -210,7 +210,7 @@ function doCheck() {
           CONT=false
           ;;
       y|Y|* )
-          read -rp "This can't be undone. Press any key to confirm. "
+          read -rp "Press any key to confirm. "
           CONT=true
             # -r : fixing backslashes
             # -p : prompt
