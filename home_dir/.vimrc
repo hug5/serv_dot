@@ -60,5 +60,5 @@ let python_highlight_all = 1
 " colorscheme robinhood
 "
 " colorscheme evening
-" colorscheme desert
+colorscheme desert
 " colorscheme habamax

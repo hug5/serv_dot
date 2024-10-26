@@ -332,7 +332,8 @@
 
   function _mail-help() {
 cat << EOF
-mail-h: This help
+$ mail-h
+  # This help
 
 ## sendmail command:
 
@@ -345,13 +346,12 @@ $ sendmail -f <return_address> <to_recipient>
 > This is the body of the message
 > .
 
+## mail/mailx command:
 
-## mail command:
-
-$ mail <recipient_email> -r <return_address> -u <sender_email>
+$ mail <recipient_email> -r <return_address>
  # Include recipient directly;
 
-$ mail -r <return_address> -u <sender_email>
+$ mail -r <return_address>
   # mail will ask for the recipient address
 
 # ctrl-d to send mail and exit;
@@ -360,14 +360,18 @@ EOF
 
   function _postfix-help() {
 cat << EOF
-postfix-h:  This help
+$ postfix-h
+  # This help
+$ sudo postconf
+  # postfix configuration
 
 ## Postfix aliases:
 
  prl: postfix reload
+ prs: postfix restart
 pchk: postfix check
   ps: systemctl status postfix
- ps@: systemctl tatus postfix@-
+ ps@: systemctl status postfix@-
 
 
 ## Postfix hash commands:
@@ -377,7 +381,7 @@ $ sudo postmap -F hash:tls_server_sni_maps
 $ sudo postmap hash:smtpd_sender_login_maps
   # All other files use this syntax
 $ postmap-hash
-  # alias to hash ALL files
+  # alias to hash ALL files + reload postfix
 
 
 ## sasl password commands:
@@ -394,7 +398,7 @@ $ sudo sasldblistusers2
 
 ## Mail queue aliases:
 
-mailq: display the mail queue
+$ mailq: display the mail queue
 
 # Various mail queue flush commands
 mailq-f1: sudo postsuper -r ALL
@@ -522,11 +526,12 @@ EOF
 
   # postfix
   alias prl="sudo postfix reload"
+  alias prs="sudo systemctl restart postfix"
   alias pchk="sudo postfix check"
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
-  alias postmap-hash="sudo postmap hash:sender_dep_relay_maps && sudo postmap hash:smtpd_sender_login_maps && sudo postmap hash:smtp_sasl_passwd_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postmap hash:virtual_alias_domains && sudo postmap hash:virtual_alias_maps"
+  alias postmap-hash="sudo postmap hash:sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postfix reload && echo done."
 
   # postfix mail queue commands:
   # mailq
