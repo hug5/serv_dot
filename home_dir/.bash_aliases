@@ -348,10 +348,10 @@ $ sendmail -f <return_address> <to_recipient>
 
 ## mail/mailx command:
 
-$ mail <recipient_email> -r <return_address>
+$ mailx <recipient_email> -r <return_address>
  # Include recipient directly;
 
-$ mail -r <return_address>
+$ mailx -r <return_address>
   # mail will ask for the recipient address
 
 # ctrl-d to send mail and exit;
@@ -415,36 +415,38 @@ EOF
   # Display help for keyboard shorts/aliases; use s-h;
   function _show_shell_help() {
 cat << EOF
- s-h:  This help
+ s-h: This help
 
-  sv:  sudo vim
+  sv: sudo vim
 
-  ss:  sudo systemctl [command] [service]
-ssrl:  sudo systemctl reload [service]
-ssrs:  sudo systemctl restart [service]
- sss:  sudo systemctl status [service]
+  ss: sudo systemctl [command] [service]
+ssrl: sudo systemctl reload [service]
+ssrs: sudo systemctl restart [service]
+ sss: sudo systemctl status [service]
 
- tail-sys:  sudo tail -n30 /var/log/syslog -f
- tail-mail:  sudo tail -n30 /var/log/mail.log -f
- tail-jc:  sudo journalctl -f
+ tail-syslog: sudo tail -n30 /var/log/syslog -f
+   tail-mail: sudo tail -n30 /var/log/mail.log -f
+tail-journal: sudo journalctl -f
+  tail-uwsgi: tail -fn100 etc/log/uwsgi.log
+  tail-debug: tail -fn100 etc/log/debug.log
 
-      j:  jobs
-  jkill:  kill all jobs
-      f:  fg
-   f1-N:  fg 1... fg N
+      j: jobs
+  jkill: kill all jobs
+      f: fg
+   f1-N: fg 1... fg N
 
-    urs:  uwsgi restart
-    url:  uwsgi touch file
-     us:  uwsgi status
+    urs: uwsgi restart
+    url: uwsgi touch file
+     us: uwsgi status
 
-    nrl:  nginx reload
-    nrs:  nginx restart
-     ns:  nginx status
-     nt:  nginx test configuration
+    nrl: nginx reload
+    nrs: nginx restart
+     ns: nginx status
+     nt: nginx test configuration
 
-    frl:  php8.2 reload
-    frs:  php8.2 restart
-     fs:  php8.2 status
+    frl: php8.2 reload
+    frs: php8.2 restart
+     fs: php8.2 status
 EOF
   }
 
@@ -463,9 +465,12 @@ EOF
   alias ssrs="sudo systemctl restart"
   alias sss="sudo systemctl status"
 
-  alias mon-sl="sudo tail -n30 /var/log/syslog -f"
-  alias mon-jc="sudo journalctl -f"
-  alias mon-ml="sudo tail -n30 /var/log/mail.log -f"
+  alias tail-syslog="sudo tail -fn100 /var/log/syslog"
+  alias tail-mail="sudo tail -fn100 /var/log/mail.log"
+  alias tail-journal="sudo journalctl -f"
+  alias tail-uwsgi="tail -fn100 etc/log/uwsgi.log"
+  alias tail-debug="tail -fn100 etc/log/debug.log"
+
 
   # Jobs aliases
   alias j="jobs -l"
@@ -531,7 +536,7 @@ EOF
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
-  alias postmap-hash="sudo postmap hash:sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postfix reload && echo done."
+  alias postmap-hash="sudo postmap hash:sender_canonical_maps sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postfix reload && echo done."
 
   # postfix mail queue commands:
   # mailq
