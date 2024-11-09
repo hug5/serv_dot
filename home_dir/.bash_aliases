@@ -424,8 +424,8 @@ ssrl: sudo systemctl reload [service]
 ssrs: sudo systemctl restart [service]
  sss: sudo systemctl status [service]
 
- tail-syslog: sudo tail -n30 /var/log/syslog -f
-   tail-mail: sudo tail -n30 /var/log/mail.log -f
+ tail-syslog: sudo tail -fn100 /var/log/syslog
+   tail-mail: sudo tail -fn100 /var/log/mail.log
 tail-journal: sudo journalctl -f
   tail-uwsgi: tail -fn100 etc/log/uwsgi.log
   tail-debug: tail -fn100 etc/log/debug.log
@@ -536,7 +536,7 @@ EOF
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
-  alias postmap-hash="sudo postmap hash:sender_canonical_maps sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && sudo postfix reload && echo done."
+  alias postmap-hash="sudo postmap hash:recipient_canonical_map sender_canonical_maps sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && echo 'postmap hash done' && sudo postfix reload"
 
   # postfix mail queue commands:
   # mailq
