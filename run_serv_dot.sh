@@ -93,8 +93,9 @@ function install_programs_basic() {
     # sudo ln -s /opt/pipx /root/.local/pipx
 
     # pipx install trash-cli with --global flag;
+    # The flag must be in this specific order;
     echo "Pipx installing trash-cli..."
-    sudo pipx install trash-cli --global
+    sudo pipx --global install trash-cli
 
     echo "Done."
 
