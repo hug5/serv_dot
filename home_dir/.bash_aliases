@@ -425,13 +425,15 @@ ssrs: sudo systemctl restart [service]
  sss: sudo systemctl status [service]
 
  tail-syslog: sudo tail -fn100 /var/log/syslog
-   tail-mail: sudo tail -fn100 /var/log/mail.log
 tail-journal: sudo journalctl -f
-  tail-uwsgi: tail -fn100 etc/log/uwsgi.log
-  tail-debug: tail -fn100 etc/log/debug.log
+   tail-mail: sudo tail -fn100 /var/log/mail.log
+
+    tail-emp: sudo tail -fn100 /var/log/uwsgi/emperor.log
+  tail-uwsgi: tail -fn100 etc/log/uwsgi.log  (local)
+  tail-debug: tail -fn100 etc/log/debug.log  (local)
 
       j: jobs
-  jkill: kill all jobs
+ jkilla: kill all jobs
       f: fg
    f1-N: fg 1... fg N
 
@@ -468,6 +470,7 @@ EOF
   alias tail-syslog="sudo tail -fn100 /var/log/syslog"
   alias tail-mail="sudo tail -fn100 /var/log/mail.log"
   alias tail-journal="sudo journalctl -f"
+  alias tail-emp="sudo tail -fn100 /var/log/uwsgi/emperor.log"
   alias tail-uwsgi="tail -fn100 etc/log/uwsgi.log"
   alias tail-debug="tail -fn100 etc/log/debug.log"
 
@@ -475,7 +478,9 @@ EOF
   # Jobs aliases
   alias j="jobs -l"
   # alias jkill='kill $(jobs -p) &>/dev/null; f1 &>/dev/null; f2 &>/dev/null; f3 &>/dev/null; f4 &>/dev/null; f5 &>/dev/null; f6 &>/dev/null; f7 &>/dev/null; f8 &>/dev/null'
-  alias jkill='kill $(jobs -p); sleep 1; f1;f2;f3;f4;f5;f6;f7;f8'
+  alias jkilla='kill $(jobs -p); sleep 1; f1;f2;f3;f4;f5;f6;f7;f8'
+    # This kills all active jobs
+    # -p : list jobs and its process IDs
   alias f="fg"
   alias f1="fg 1"
   alias f2="fg 2"
@@ -488,33 +493,61 @@ EOF
 
   # uWSGI + nginx aliases
   alias urs="echo 'uWSGI restarting...' && sudo systemctl restart uwsgi-emperor && echo 'uWSGI restart done.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
-  # alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.' && sleep 1.5s && sudo systemctl status uwsgi-emperor"
-  # alias url="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
+  # Note: There is no "systemctl reload uwsgi-emperor"; have to restart;
 
   # Want to make the uswgi reload file independent of projects;
   # touching shouldn't reload all projects;
   # Then in vassals file, set:
   # touch-reload = /srv/http/ww2.inkonpages/reload-uwsgi
-  function reload_uwsgi() {
-      local dir1
-      local dir2
-      local path1
-      local path2
-      dir1=$(echo "$(pwd)" | cut -f 2 -d '/')
-      dir2=$(echo "$(pwd)" | cut -f 3 -d '/')
-      if [[ $dir1 != "srv" || $dir2 != "http" ]]; then
-          echo "Should run command in a project folder: /srv/http/project/"
+  # function uwsgi_reload() {
+  #     local dir1
+  #     local dir2
+  #     local path1
+  #     local path2
+  #     dir1=$(echo "$(pwd)" | cut -f 2 -d '/')
+  #     dir2=$(echo "$(pwd)" | cut -f 3 -d '/')
+  #     if [[ $dir1 != "srv" || $dir2 != "http" ]]; then
+  #         echo "Should run command in a project folder: /srv/http/project/"
+  #     else
+  #         echo 'touch-reload: Reload uwsgi-emperor server for this vassal.'
+  #         path1=$(echo "$(pwd)" | cut -f 1,2,3,4 -d '/')
+  #         # path2=${path1}'/reload-uwsgi'
+  #         path2=${path1}'/uwsgi-reload'
+  #         touch $path2
+  #         echo '♛ uwsgi-emperor server reloaded.'
+  #     fi
+  # }
+    # I don't think there's a need to check the full path; just check local folder;
+    # If the file exists, then do it; if not, then error;
+
+  function uwsgi_reload(){
+      if [ -f ./uwsgi-reload ]; then
+          echo 'Do touch-reload...'
+          touch "uwsgi-reload"
+          echo '♛ uwsgi-emperor reloaded.'
       else
-          echo 'Reload uwsgi-emperor server.'
-          path1=$(echo "$(pwd)" | cut -f 1,2,3,4 -d '/')
-          path2=${path1}'/reload-uwsgi'
-          touch $path2
-          echo '♛ uwsgi-emperor server reloaded.'
+        echo "uwsgi-reload not found."
       fi
   }
-  alias url=reload_uwsgi
+
+  function uwsgi_workers_reload(){
+      if [ -f ./uwsgi-workers-reload ]; then
+          echo 'Do touch-workers-reload...'
+          touch "uwsgi-workers-reload"
+          echo '♛ uwsgi-emperor workers reloaded.'
+      else
+        echo "uwsgi-workers-reload not found."
+      fi
+  }
+
+
+  alias url=uwsgi_reload
+    # Do: touch-reload
+  alias uwrl=uwsgi_workers_reload
+    # Do: touch-workers-reload
+
   # Rename the old command; keep for now;
-  alias url2="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
+  # alias url2="echo 'touch uWSGI reload file' && sudo touch /etc/uwsgi-emperor/reload && echo 'uWSGI reload touched.'"
 
   alias us='sudo systemctl status uwsgi-emperor'
 
@@ -536,7 +569,7 @@ EOF
   alias ps="sudo systemctl status postfix"
   alias ps@="sudo systemctl status postfix@-"
 
-  alias postmap-hash="sudo postmap hash:recipient_canonical_map sender_canonical_maps sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && echo 'postmap hash done' && sudo postfix reload"
+  alias postmap-hash="sudo postmap hash:recipient_canonical_maps sender_canonical_maps sender_dep_relay_maps smtpd_sender_login_maps smtp_sasl_passwd_maps virtual_alias_domains virtual_alias_maps && sudo postmap -F hash:tls_server_sni_maps && echo 'postmap hash done' && sudo postfix reload"
 
   # postfix mail queue commands:
   # mailq
