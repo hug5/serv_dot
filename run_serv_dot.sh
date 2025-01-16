@@ -35,7 +35,7 @@ function install_programs_postfix() {
     # Can't use which, hash or command -v here because postfix
     # is not a command but a program!
 
-    if [[ -z "$RESULT" ]]; then
+    if [[ "$RESULT" == "postfix:" ]]; then
 
         read -rp "Do you want to install Postfix? (Y/n): " CHOICE
         # Why -r? https://www.shellcheck.net/wiki/SC2162
