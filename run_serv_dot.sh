@@ -19,7 +19,8 @@
 declare CONT=false
   # continue operation or not:
 
-declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
+# declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
+declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide python3-pip moreutils ufw rsyslog fail2ban nginx-full inxi"
 
 declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
 
@@ -77,6 +78,12 @@ function install_programs_basic() {
     sudo apt install $PROGRAMS -y
       #--dr-run
       # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
+
+    # Install pipx with pip:
+    pip install --break-system-packages pipx
+    pipx ensurepath
+
+
     echo "Done."
 
     #-------------------------------------------------------
@@ -85,7 +92,6 @@ function install_programs_basic() {
     # Install trash-cli through pipx
     # echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
     # sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
-
     # # Then make additional symlink from /opt/pipx to /root/.local/pipx
     # echo "Making symlink from /opt/pipx to /root/.local/pipx..."
     # sudo mkdir /root/.local
