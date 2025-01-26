@@ -156,6 +156,7 @@ function doStart() {
     install_programs_basic
     install_programs_postfix
 
+
     echo "Making config copies..."
     copy_to_home
     copy_to_root
