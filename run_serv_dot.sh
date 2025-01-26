@@ -81,7 +81,7 @@ function install_programs_basic() {
 
     # Install pipx with pip:
     pip install --break-system-packages pipx
-    pipx ensurepath
+    ~/.local/bin/pipx ensurepath
 
 
     echo "Done."
@@ -101,7 +101,7 @@ function install_programs_basic() {
     # pipx install trash-cli with --global flag;
     # The flag must be in this specific order; Without sudo;
     echo "Pipx installing trash-cli..."
-    pipx --global install trash-cli
+    ~/.local/bin/pipx --global install trash-cli
 
     echo "Done."
 
