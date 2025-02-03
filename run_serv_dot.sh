@@ -80,9 +80,9 @@ function install_programs_basic() {
       # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
 
     # Install pipx with pip:
-    pip install --break-system-packages pipx
+    pip install pipx --break-system-packages
+    # Until .bashrc is sourced or new bash is started, there is no path yet; have to use full path;
     ~/.local/bin/pipx ensurepath
-
 
     echo "Done."
 
@@ -90,23 +90,49 @@ function install_programs_basic() {
     ## Install trash-cli
 
     # Install trash-cli through pipx
-    # echo "Pipx installing trash-cli to /opt/pipx and creating symlink to /usr/local/bin..."
-    # sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
-    # # Then make additional symlink from /opt/pipx to /root/.local/pipx
+    echo "Pipx installing trash-cli to /opt/pipx_install and creating symlink to /usr/local/bin..."
+    sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
+      # This installs the trash-cli binaries into PIPX_HOME folder; and creates a symlink to PIPX_HOME in PIPX_BIN_DIR
+
+    # Then make additional symlink from /opt/pipx to /root/.local/pipx
+    # The reason for this is to enable "sudo pipx..." cp,,amd; otherwise, doesn't work;
     # echo "Making symlink from /opt/pipx to /root/.local/pipx..."
     # sudo mkdir /root/.local
     # sudo rm /root/.local/pipx
-    # sudo ln -s /opt/pipx /root/.local/pipx
+      # in case there's a pipx file there already
+    # sudo ln -s ~/.local/bin/pipx /root/.local/bin/pipx
+      # This not working anymore??
 
+    echo "Making symlink from ~/.local/bin/pipx to /usr/local/bin/pipx..."
+    sudo ln -s ~/.local/bin/pipx /usr/local/bin/pipx
+      # could put it in /usr/local/bin, or /usr/bin; local/bin is less crowded;
+    # echo "Making symlink from /opt/pipx_install/pipx to /usr/bin/pipx..."
+    # sudo ln -s ~/.local/bin/pipx /usr/bin/pipx
+      # Have to put here now?!!
+      # Now should be able to call, "$ sudo pipx..."
+
+    # This is a less than ideal and very messy solution!!
+
+    # This --global thing doesn't work! sudo still can't use it!
+    # Going back to the old way of creating links manually;
     # pipx install trash-cli with --global flag;
     # The flag must be in this specific order; Without sudo;
-    echo "Pipx installing trash-cli..."
-    ~/.local/bin/pipx --global install trash-cli
+    #echo "Pipx installing trash-cli..."
+    #~/.local/bin/pipx --global install trash-cli
 
     echo "Done."
 
     # fi
 }
+
+optional environment variables:
+  PIPX_HOME              Overrides default pipx location. Virtual Environments will be installed to
+                        $PIPX_HOME/venvs.
+  PIPX_GLOBAL_HOME       Used instead of PIPX_HOME when the `--global` option is given.
+  PIPX_BIN_DIR           Overrides location of app installations. Apps are symlinked or copied here.
+  PIPX_GLOBAL_BIN_DIR    Used instead of PIPX_BIN_DIR when the `--global` option is given.
+  PIPX_MAN_DIR           Overrides location of manual pages installations. Manual pages are symlinked or
+                        copied here.
 
 function copy_to_home() {
     # Copy hidden filds to home
