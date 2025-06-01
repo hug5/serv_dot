@@ -20,7 +20,7 @@ declare CONT=false
   # continue operation or not:
 
 # declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
-declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide python3-pip moreutils ufw rsyslog fail2ban nginx-full inxi"
+declare PROGRAMS="bat ripgrep ncdu screen ranger neofetch fzf fd-find htop python3-full zoxide python3-pip moreutils ufw rsyslog fail2ban nginx-full inxi"
 
 declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
 
