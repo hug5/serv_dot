@@ -125,14 +125,15 @@ function install_programs_basic() {
     # fi
 }
 
-optional environment variables:
-  PIPX_HOME              Overrides default pipx location. Virtual Environments will be installed to
-                        $PIPX_HOME/venvs.
-  PIPX_GLOBAL_HOME       Used instead of PIPX_HOME when the `--global` option is given.
-  PIPX_BIN_DIR           Overrides location of app installations. Apps are symlinked or copied here.
-  PIPX_GLOBAL_BIN_DIR    Used instead of PIPX_BIN_DIR when the `--global` option is given.
-  PIPX_MAN_DIR           Overrides location of manual pages installations. Manual pages are symlinked or
-                        copied here.
+# optional environment variables:
+#   PIPX_HOME              Overrides default pipx location. Virtual Environments will be installed to
+#                         $PIPX_HOME/venvs.
+#   PIPX_GLOBAL_HOME       Used instead of PIPX_HOME when the `--global` option is given.
+#   PIPX_BIN_DIR           Overrides location of app installations. Apps are symlinked or copied here.
+#   PIPX_GLOBAL_BIN_DIR    Used instead of PIPX_BIN_DIR when the `--global` option is given.
+#   PIPX_MAN_DIR           Overrides location of manual pages installations. Manual pages are symlinked or
+#                         copied here.
+
 
 function copy_to_home() {
     # Copy hidden filds to home
