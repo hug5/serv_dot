@@ -11,75 +11,75 @@
 	helper = store
 
 [alias]
-	s  = status
-  ss = status --short
+	# s  = status
+  # ss = status --short
 
 
-  # Note: doing --pretty seems to put it on one line;
-  lp   = log --oneline
-    # Will use this to print the original plain version without color
-  l    = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\"
-  lr   = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --reverse
-	la   = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --all
-	  # --all : Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as <commit>; Seems to show everything;
-  ldg  = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph
-  ldga = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph --all
-	lm   = log master --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\"
-		# Show logs from the POV of master HEAD; useful when you're in a prior branch;
+  # # Note: doing --pretty seems to put it on one line;
+  # lp   = log --oneline
+  #   # Will use this to print the original plain version without color
+  # l    = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\"
+  # lr   = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --reverse
+	# la   = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --all
+	#   # --all : Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as <commit>; Seems to show everything;
+  # ldg  = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph
+  # ldga = log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph --all
+	# lm   = log master --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\"
+	# 	# Show logs from the POV of master HEAD; useful when you're in a prior branch;
 
-  b  = branch -v
-  bs = branch -v --sort=-committerdate
-    # Sort; commiterdate puts newest last; -commerdate puts it first;
+  # b  = branch -v
+  # bs = branch -v --sort=-committerdate
+  #   # Sort; commiterdate puts newest last; -commerdate puts it first;
 
-  aa = add --all
-    # Also add gaa="add --all" alias in .bash_options;
-    # so can do either g aa, or gaa
+  # aa = add --all
+  #   # Also add gaa="add --all" alias in .bash_options;
+  #   # so can do either g aa, or gaa
 
-  aacm = commit -am
-    # stage all + commit + message
-    # This adds/stages all changes and commit with message
-  #aacmm = commit -am wip
-  #aacmm = !git add --all &&  git commit -am wip
-  aacmm = !git add --all && git commit -am wip
-    # stage all + commit + message 'wip'
+  # aacm = commit -am
+  #   # stage all + commit + message
+  #   # This adds/stages all changes and commit with message
+  # #aacmm = commit -am wip
+  # #aacmm = !git add --all &&  git commit -am wip
+  # aacmm = !git add --all && git commit -am wip
+  #   # stage all + commit + message 'wip'
 
-  aaca = !git add --all && git commit --amend --no-edit
-    # Combine gaa + gca; add all + commit amend, no edit;
-
-
-  # Going to just remove --all options; the acronyms get too unwiedly/confuing with it;
-  # m = message, a = amend
-  cm = commit --message
-  #cma = commit --all --message
-  ca = commit --amend --no-edit
-  #cama = commit --amend --all --no-edit
-  #cmama = commit --amend --all --message
-  cma = commit --amend --message
-
-  c = checkout
-
-  stl = stash list
-    # stash list
-  stpu = stash push
-  	# stash stage & unstaged
-  stpum = stash push -m
-  	# stash with name/message
-  stap = stash apply
-  stpp = stash pop
-  stdr = stash drop
-  stclear = stash clear
-    # remove all stash
+  # aaca = !git add --all && git commit --amend --no-edit
+  #   # Combine gaa + gca; add all + commit amend, no edit;
 
 
-  cfl = config --list
-    # all config settings
-	cfa = config --get-regexp ^alias
-    # config alias settings
+  # # Going to just remove --all options; the acronyms get too unwiedly/confuing with it;
+  # # m = message, a = amend
+  # cm = commit --message
+  # #cma = commit --all --message
+  # ca = commit --amend --no-edit
+  # #cama = commit --amend --all --no-edit
+  # #cmama = commit --amend --all --message
+  # cma = commit --amend --message
 
-  p = push
-  pf = push --force
+  # c = checkout
 
-  pullx = pull --depth 5
+  # stl = stash list
+  #   # stash list
+  # stpu = stash push
+  # 	# stash stage & unstaged
+  # stpum = stash push -m
+  # 	# stash with name/message
+  # stap = stash apply
+  # stpp = stash pop
+  # stdr = stash drop
+  # stclear = stash clear
+  #   # remove all stash
+
+
+  # cfl = config --list
+  #   # all config settings
+	# cfa = config --get-regexp ^alias
+  #   # config alias settings
+
+  # p = push
+  # pf = push --force
+
+  # pullx = pull --depth 5
 
 [help]
 	autocorrect = 0   # Disable it; was 50;

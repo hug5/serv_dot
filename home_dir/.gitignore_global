@@ -1,5 +1,13 @@
-**/conf.d/*
-**/conf/*
+#**/conf.d/*
+**/conf/*.toml
+**/conf/*.json
+  # the ** seems to denote any directory; just doing * doesn't work
+  # Not sure why for conf, have to prepend with **/ for git to ignore;
+  # But others below wasn't necessary; doesn't make sense;
+
+*prepros*
+*koala*
+*.bundle
 *.log
 *.sublime-project
 *.sublime-workspace
@@ -13,6 +21,8 @@
 .git
 .gitattributes
 .venv
+.ruff_cache
+.mypy_cache
 venv
 cache/*
 cert/*
@@ -20,8 +30,5 @@ log/*
 __pycache__
 *archive*
 archv
-*prepros*
-*koala*
-*.bundle
 NOTES
 TODO

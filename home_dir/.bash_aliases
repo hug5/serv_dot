@@ -42,6 +42,7 @@
   alias svif='sudo ~/.bash_vif'
 
   alias fgo='. ~/.bash_fgo'
+  alias fgod=fgo
   alias fgof='. ~/.bash_fgo -f'
 
   alias bat='batcat'
@@ -196,22 +197,14 @@
   alias qqq='tmux kill-session'
 
 
-  # For other custom aliases, see .bash_aliases
-
-  alias rmdir='rmdir -v'
-  alias cp='cp -v'
-  alias mv='mv -vi'
-  alias ln='ln -v'
-  alias mkdir='mkdir -vp'
-  alias chmod='chmod -v --preserve-root'
-  alias chown='chown -v --preserve-root'
 
 #------------------------------------------------------------------
 ### Trash-cli
 #------------------------------------------------------------------
 
 
-  sep_graph='•  •  •  •  •  •  •  •'
+  # sep_graph='•  •  •  •  •  •  •  •'
+  sep_graph='—————————————————————————'
 
   alias trasher='sudo trash-empty -f && trash-empty -f && echo trash-empty sudo+$USER. Okay.'
   alias trashe='trash-empty -f && echo trash-empty $USER. Okay.'
@@ -232,6 +225,7 @@
   alias rmdir='rmdir -v'
   alias cp='cp -v'
   alias mv='mv -vi'
+  alias smv="sudo mv -vi"
   alias ln='ln -v'
   alias mkdir='mkdir -vp'
   alias chmod='chmod -v --preserve-root'
@@ -288,6 +282,8 @@
   alias vactivate=". ./.venv/bin/activate"
   alias vact=vactivate
   alias dact=deactivate
+  alias dactivate=deactivate
+
 
 #------------------------------------------------------------------
 ### Search aliases
@@ -312,17 +308,130 @@
 ### Git
 #------------------------------------------------------------------
 
-  alias g="git"
+
   alias gs="git status"
-  alias gaa="git add --all && git status && echo '-- all files staged --'"
-  alias gca="git commit --amend --no-edit && git status && echo '-- changes committed, amended, no edit --'"
-  alias gaaca="git add --all && git commit --amend --no-edit"
+  alias gss="git status --short"
+
+  alias gv="git add --all && git status && echo '-- all files staged --'"
+    # Also add gaa="add --all" alias in .bash_options;
+    # so can do either g aa, or gaa
+    #aa = add --all
+    # aa = !git add --all && git status && echo '-- all files staged --'
+
   alias gcm="git commit --message"
-  alias gl="git log -n10 --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s %C(red)%d\" && echo '[git log -n10]'"
+    # commit + message + <message>
+
+  alias gcmm="git commit -m wip"
+    # commit with default 'wip';
+    # $ git commit --allow-empty-message -m ''
+      # Can also commit without message;
+      # For reference here;
+
+  alias gca="git commit --amend --no-edit"
+    # commit + amend
+
+  alias gcam="git commit --amend --message"
+    # commit + amend + <message>
+
+  alias gcvm="git commit -am"
+    # commit + auto stage all + message + <message>
+
+  alias gcva="git add --all && git commit --amend --no-edit"
+    # Combine gA + gca; add all + commit amend, no edit;
+    # aaca = !git add --all && git commit --amend --no-edit
+
+  alias gcvmm="git add --all && git commit -am wip"
+    # stage all + commit + message 'wip'
+    # The ! denotes, run the command through the shell;
+    # Do not run via normal git;
+    #aacmm = !git add --all && git commit -am wip
+
+
+  # Note: doing --pretty seems to put it on one line;
+
+  # @ gl1 : log, simple colorless one line
+  alias gl1="git log --oneline"
+    # Will use this to print the original plain version without color
+    # Will never use this!
+
+  # Variable N
+  N=10  # Number of lines to list;
+
+  # @ gl : git log N lines
+  alias gl="git --no-pager log -n ${N} --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" && echo '[git log -n ${N}]'"
+
+  alias glr="git --no-pager log -n ${N} --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --reverse && echo '[git log reverse -n ${N}]'"
+
+  alias gll="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\""
+    # List all from this branch; no line limit;
+
+  alias gllr="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --reverse"
+    # List all from this branch, reverse; no line limit;
+
+  alias gla="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --all"
+    # --all : list all logs from all branches; no line limit;
+    # --all : Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as <commit>;
+
+  alias gldg="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph"
+    # git log with graph + decoration; but --decorate doesn't seem to do anything becuase probably over-decorated with --pretty, %d, and the rest of it;
+
+
+  alias gldga="git log --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\" --decorate --graph --all"
+    # git log (all branches) with graph + decoration; but --decorate doesn't seem to do anything??
+
+  alias glm="git log master --pretty=\"%C(blue)%h  %C(yellow)%as %C(brightGreen)(%cr)%x09 %C(white)%an %C(magenta)%s%C(red)%d\""
+    # Show logs from the POV of master HEAD; useful when you're in a prior branch;
+
   alias gb="git branch -v"
-  alias gc="git checkout"
+    # list branches
+
+  alias gba="git branch -av"
+    # list all branches, including remote;
+
+  alias gbs="git branch -v --sort=-committerdate"
+    # like gba + sort, newest first;
+    # Sort :
+      # -committerdate -- sorts newest first;
+      # committerdate  -- sorts newest last;
+
+  alias gbsa="git branch -av --sort=-committerdate"
+    # like gbs + all branches, including remote;
+
+  alias gch="git checkout"
+
+  alias gst="git stash"
+
+  alias gstl="git stash list"
+    # stash list
+  alias gstpu="git stash push"
+    # stash stage & unstaged
+  alias gstpum="git stash push -m"
+    # stash with name/message <message>
+  alias gstapply="git stash apply"
+  alias gstpop="git stash pop"
+  alias gstdrop="git stash drop"
+  alias gstclear="git stash clear"
+    # remove all stash
+
+  #alias gcfl="git config --list"
+    # all config settings
+  #alias gcfa="git config --get-regexp ^alias"
+    # config alias settings
+
+  alias gpush="git push"
+    # Not sure if just 'p' is a good idea?
+  alias gpushf="git push --force"
+  alias gpushfl="git push --force-with-lease"
+    # Safer than --force;
+    # Only pushes if remote hasn't changed since last fetch
+    # If someone else pushed/commited, then push fails
+
   alias gpull="git pull"
-  alias gpullx="git pull --depth 5"
+  alias gpull1="git pull --depth 1 && echo 'git pull --depth 1'"
+  alias gpull2="git pull --depth 2 && echo 'git pull --depth 2'"
+  alias gpull3="git pull --depth 3 && echo 'git pull --depth 3'"
+  alias gpull4="git pull --depth 4 && echo 'git pull --depth 4'"
+  alias gpull5="git pull --depth 5 && echo 'git pull --depth 5'"
 
   source /usr/share/bash-completion/completions/git
 
