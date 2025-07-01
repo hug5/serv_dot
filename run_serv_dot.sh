@@ -103,6 +103,7 @@ function install_programs_basic() {
 
     # Install trash-cli through pipx
     echo "Pipx installing trash-cli to /opt/pipx_install and creating symlink to /usr/local/bin..."
+    # sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
     sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
       # This installs the trash-cli binaries into PIPX_HOME folder; and creates a symlink to PIPX_HOME in PIPX_BIN_DIR
     # sudo env PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
