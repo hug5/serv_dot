@@ -81,18 +81,33 @@ function install_programs_basic() {
 
     # Install pipx with pip:
     pip install pipx --break-system-packages
-    # Until .bashrc is sourced or new bash is started, there is no path yet; have to use full path;
+      # Until .bashrc is sourced or new bash is started, there is no path yet; have to use full path;
+      # // 2025-06-30 : This installed pipx into ~/.local/bin/pipx, and created a symlink
+       # from /usr/local/bin/pipx to ~/.local/bin/pipx
+      # Calling either directly (with path) seems to work;
     ~/.local/bin/pipx ensurepath
 
     echo "Done."
 
+
+    # sudo pip install pipx --prefix=/opt --break-system-packages
+
+
     #-------------------------------------------------------
     ## Install trash-cli
+
+    # // 2025-06-30 Mon 19:41
+    # Now there's permission problems! So have to do this:
+    sudo chmod 777 /opt
+    sudo chmod 777 /usr/local/bin
 
     # Install trash-cli through pipx
     echo "Pipx installing trash-cli to /opt/pipx_install and creating symlink to /usr/local/bin..."
     sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
       # This installs the trash-cli binaries into PIPX_HOME folder; and creates a symlink to PIPX_HOME in PIPX_BIN_DIR
+    # sudo env PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
+
+
 
     # Then make additional symlink from /opt/pipx to /root/.local/pipx
     # The reason for this is to enable "sudo pipx..." cp,,amd; otherwise, doesn't work;
@@ -110,6 +125,10 @@ function install_programs_basic() {
     # sudo ln -s ~/.local/bin/pipx /usr/bin/pipx
       # Have to put here now?!!
       # Now should be able to call, "$ sudo pipx..."
+
+
+    sudo chmod 755 /opt
+    sudo chmod 755 /usr/local/bin
 
     # This is a less than ideal and very messy solution!!
 
