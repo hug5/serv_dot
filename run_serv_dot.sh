@@ -6,6 +6,9 @@
 # /bin/bash
 
 # // 2024-03-10 Sun 20:42
+# // 2025-06-30 Mon 22:55
+  # Fix mistake paste left unremoved;
+  # Fix pipx not working again;
 
 # This copies config files in home and other directories:
   # 1) Copies config files to $HOME
@@ -13,20 +16,37 @@
   # 3) copies neofetch/config.conf to $HOME/.config/neofetch/
 
 
-#------------------------------------------
-
+#ᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳ
 
 declare CONT=false
   # continue operation or not:
 
 # declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
-declare PROGRAMS="bat ripgrep ncdu screen ranger neofetch fzf fd-find htop python3-full zoxide python3-pip moreutils ufw rsyslog fail2ban nginx-full inxi"
+declare PROGRAMS="bat ripgrep ncdu screen ranger neofetch \
+    fzf fd-find htop python3-full zoxide python3-pip moreutils \
+    ufw rsyslog fail2ban nginx-full inxi"
 
-declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin libgsasl18 libsasl2-dev libsasl2-modules"
+declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin \
+    libgsasl18 libsasl2-dev libsasl2-modules"
 
 
+# Can also do an array:
+# declare -a PROGRAMS=(
+#     bat ripgrep ncdu screen ranger
+#     neofetch fzf fd-find htop
+#     python3-full zoxide python3-pip
+#     moreutils ufw rsyslog
+#     fail2ban nginx-full inxi
+# )
+# echo "${PROGRAMS[*]}"
+# Note: The delimiter is controlled by IFS (default: space). Change it temporarily if needed:
+  # Pass as single string;
+# IFS=','; echo "${PROGRAMS[*]}"; unset IFS  # Output: "bat,ripgrep,ncdu"
+# sudo apt install "${PROGRAMS[@]}"  # Correctly passes each element as an argument
+  # Pass individually
 
-#------------------------------------------
+#ᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳ
+
 function install_programs_postfix() {
 
     local RESULT
@@ -48,7 +68,6 @@ function install_programs_postfix() {
               echo "Done."
               ;;
         esac
-
     fi
 
 }
@@ -71,6 +90,7 @@ function install_programs_basic() {
 
     # if [[ -z "$RESULT" ]]; then
 
+
     #-------------------------------------------------------
     ## Install basic programs
 
@@ -79,24 +99,31 @@ function install_programs_basic() {
       #--dr-run
       # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
 
+
+    #-------------------------------------------------------
+    ## Install pipx
+
     # Install pipx with pip:
     pip install pipx --break-system-packages
       # Until .bashrc is sourced or new bash is started, there is no path yet; have to use full path;
       # // 2025-06-30 : This installed pipx into ~/.local/bin/pipx, and created a symlink
        # from /usr/local/bin/pipx to ~/.local/bin/pipx
-      # Calling either directly (with path) seems to work;
+    # sudo pip install pipx --prefix=/opt --break-system-packages
+      # If want to install pipx inside /opt folder; this was an attempt
+       # to fix the problem; but still didn't work;
+
     ~/.local/bin/pipx ensurepath
+      # sets the path
 
     echo "Done."
 
-
-    # sudo pip install pipx --prefix=/opt --break-system-packages
 
 
     #-------------------------------------------------------
     ## Install trash-cli
 
     # // 2025-06-30 Mon 19:41
+    # Once again, something changed with pipx so that my prior setup fails!!
     # Now there's permission problems! So have to do this:
     sudo chmod 777 /opt
     sudo chmod 777 /usr/local/bin
@@ -104,10 +131,10 @@ function install_programs_basic() {
     # Install trash-cli through pipx
     echo "Pipx installing trash-cli to /opt/pipx_install and creating symlink to /usr/local/bin..."
     # sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
-    PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
       # This installs the trash-cli binaries into PIPX_HOME folder; and creates a symlink to PIPX_HOME in PIPX_BIN_DIR
     # sudo env PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
-
+    PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
+      # Same as prior, but without sudo; if use sudo, seems the call to pipx fails for whatever reason;
 
 
     # Then make additional symlink from /opt/pipx to /root/.local/pipx
@@ -122,12 +149,14 @@ function install_programs_basic() {
     echo "Making symlink from ~/.local/bin/pipx to /usr/local/bin/pipx..."
     sudo ln -s ~/.local/bin/pipx /usr/local/bin/pipx
       # could put it in /usr/local/bin, or /usr/bin; local/bin is less crowded;
+
     # echo "Making symlink from /opt/pipx_install/pipx to /usr/bin/pipx..."
     # sudo ln -s ~/.local/bin/pipx /usr/bin/pipx
       # Have to put here now?!!
       # Now should be able to call, "$ sudo pipx..."
 
 
+    # set the permissions back to original:
     sudo chmod 755 /opt
     sudo chmod 755 /usr/local/bin
 
@@ -144,16 +173,6 @@ function install_programs_basic() {
 
     # fi
 }
-
-# optional environment variables:
-#   PIPX_HOME              Overrides default pipx location. Virtual Environments will be installed to
-#                         $PIPX_HOME/venvs.
-#   PIPX_GLOBAL_HOME       Used instead of PIPX_HOME when the `--global` option is given.
-#   PIPX_BIN_DIR           Overrides location of app installations. Apps are symlinked or copied here.
-#   PIPX_GLOBAL_BIN_DIR    Used instead of PIPX_BIN_DIR when the `--global` option is given.
-#   PIPX_MAN_DIR           Overrides location of manual pages installations. Manual pages are symlinked or
-#                         copied here.
-
 
 function copy_to_home() {
     # Copy hidden filds to home
@@ -246,13 +265,13 @@ function doCheck() {
     # fi
 
     # To keep it simple, just going to issue command to install all programs; if already installed, then apt should skip it;
-    echo "□ Install basic programs: $PROGRAMS"
-    echo "□ Install trash-cli with pipx and setup symlinks."
-    echo "□ Copy configuration files to \$HOME directory."
-    echo "□ Copy vimrc to /root directory."
-    echo "□ Copy neofetch/config.conf to \$HOME/.config/neofetch."
-    echo "□ Copy ranger conf files to \$HOME/.config/ranger."
-    echo "□ You will also be prompted later about installing Postfix."
+    echo "∘ Install basic programs: $PROGRAMS"
+    echo "∘ Install trash-cli with pipx and setup symlinks."
+    echo "∘ Copy configuration files to \$HOME directory."
+    echo "∘ Copy vimrc to /root directory."
+    echo "∘ Copy neofetch/config.conf to \$HOME/.config/neofetch."
+    echo "∘ Copy ranger conf files to \$HOME/.config/ranger."
+    echo "∘ You will also be prompted later about installing Postfix."
     read -p "Do you want to continue? (Y/n): " CHOICE
 
     ###
