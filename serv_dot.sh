@@ -257,13 +257,6 @@ function doCheck() {
 
     echo "This script will:"
 
-    # I guess I'm only installing programs if not pipx
-    # RESULT=$(which pipx)
-    # if [[ -z "$RESULT" ]]; then
-        # echo "□ Install basic programs: $PROGRAMS"
-        # echo "□ Install trash-cli with pipx and setup symlinks."
-    # fi
-
     # To keep it simple, just going to issue command to install all programs; if already installed, then apt should skip it;
     echo "∘ Install basic programs: $PROGRAMS"
     echo "∘ Install trash-cli with pipx and setup symlinks."
@@ -273,9 +266,6 @@ function doCheck() {
     echo "∘ Copy ranger conf files to \$HOME/.config/ranger."
     echo "∘ You will also be prompted later about installing Postfix."
     read -p "Do you want to continue? (Y/n): " CHOICE
-
-    ###
-      # read -p "Setup and copy configuration files to \$HOME folder, .vimrc to /root folder, and neofetch/config.conf to \$HOME/.config/neofetch? (Y/n): " CHOICE
 
     case "$CHOICE" in
 
