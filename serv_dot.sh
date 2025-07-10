@@ -129,11 +129,11 @@ function install_programs_basic() {
     sudo chmod 777 /usr/local/bin
 
     # Install trash-cli through pipx
-    echo "Pipx installing trash-cli to /opt/pipx_install and creating symlink to /usr/local/bin..."
-    # sudo PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
+    echo "Pipx installing trash-cli to /opt/pipx-install and creating symlink to /usr/local/bin..."
+    # sudo PIPX_HOME=/opt/pipx-install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
       # This installs the trash-cli binaries into PIPX_HOME folder; and creates a symlink to PIPX_HOME in PIPX_BIN_DIR
-    # sudo env PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
-    PIPX_HOME=/opt/pipx_install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
+    # sudo env PIPX_HOME=/opt/pipx-install PIPX_BIN_DIR=/usr/local/bin pipx install trash-cli
+    PIPX_HOME=/opt/pipx-install PIPX_BIN_DIR=/usr/local/bin ~/.local/bin/pipx install trash-cli --force
       # Same as prior, but without sudo; if use sudo, seems the call to pipx fails for whatever reason;
 
 
@@ -150,7 +150,7 @@ function install_programs_basic() {
     sudo ln -s ~/.local/bin/pipx /usr/local/bin/pipx
       # could put it in /usr/local/bin, or /usr/bin; local/bin is less crowded;
 
-    # echo "Making symlink from /opt/pipx_install/pipx to /usr/bin/pipx..."
+    # echo "Making symlink from /opt/pipx-install/pipx to /usr/bin/pipx..."
     # sudo ln -s ~/.local/bin/pipx /usr/bin/pipx
       # Have to put here now?!!
       # Now should be able to call, "$ sudo pipx..."
