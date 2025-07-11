@@ -57,15 +57,15 @@ function install_programs_postfix() {
 
     if [[ "$RESULT" == "postfix:" ]]; then
 
-        read -rp "Do you want to install Postfix? (Y/n): " CHOICE
+        read -rp "Do you want to install Postfix? (y/N): " CHOICE
         # Why -r? https://www.shellcheck.net/wiki/SC2162
         case "$CHOICE" in
 
-          n|N )
-              ;;
-          y|Y|* )
+          y|Y )
               sudo apt install $PROGRAMS_POSTFIX -y
               echo "Done."
+              ;;
+          n|N|* )
               ;;
         esac
     fi
