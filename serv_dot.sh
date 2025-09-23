@@ -22,7 +22,7 @@ declare CONT=false
   # continue operation or not:
 
 # declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
-declare PROGRAMS="bat ripgrep ncdu screen ranger neofetch \
+declare PROGRAMS="bat ripgrep ncdu screen ranger fastfetch \
     fzf fd-find htop python3-full zoxide python3-pip moreutils \
     ufw rsyslog fail2ban nginx-full inxi"
 
@@ -127,6 +127,12 @@ function install_programs_basic() {
     # Now there's permission problems! So have to do this:
     sudo chmod 777 /opt
     sudo chmod 777 /usr/local/bin
+
+    if [[ ! -d ~/.local/bin/pipx ]]; then
+
+        mkdir -p ~/.local/bin/pipx
+    fi
+
 
     # Install trash-cli through pipx
     echo "Pipx installing trash-cli to /opt/pipx-install and creating symlink to /usr/local/bin..."
