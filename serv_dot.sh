@@ -22,12 +22,34 @@ declare CONT=false
   # continue operation or not:
 
 # declare PROGRAMS="bat screen ranger neofetch fzf fd-find htop python3-full zoxide pipx moreutils ufw rsyslog fail2ban nginx-full inxi"
-declare PROGRAMS="bat ripgrep ncdu screen ranger fastfetch \
-    fzf fd-find htop python3-full zoxide python3-pip moreutils \
-    ufw rsyslog fail2ban nginx-full inxi"
+# declare PROGRAMS="bat ripgrep ncdu screen ranger fastfetch \
+#     fzf fd-find htop python3-full zoxide python3-pip moreutils \
+#     ufw rsyslog fail2ban nginx-full inxi"
 
-declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin \
-    libgsasl18 libsasl2-dev libsasl2-modules"
+# Make variable; but have to access like this: "${PROGRAMS[@]}"
+declare -a PROGRAMS=(
+  bat
+  ripgrep
+  ncdu
+  screen
+  ranger
+  fastfetch
+  fzf
+  fd-find
+  htop
+  python3-full
+  zoxide
+  python3-pip
+  moreutils
+  ufw
+  rsyslog
+  fail2ban
+  nginx-full
+  inxi
+)
+
+declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin\
+ libgsasl18 libsasl2-dev libsasl2-modules"
 
 
 # Can also do an array:
@@ -38,6 +60,7 @@ declare PROGRAMS_POSTFIX="mailutils postfix sasl2-bin \
 #     moreutils ufw rsyslog
 #     fail2ban nginx-full inxi
 # )
+
 # echo "${PROGRAMS[*]}"
 # Note: The delimiter is controlled by IFS (default: space). Change it temporarily if needed:
   # Pass as single string;
@@ -95,7 +118,8 @@ function install_programs_basic() {
     ## Install basic programs
 
     echo "Installing basic applications..."
-    sudo apt install $PROGRAMS -y
+    # sudo apt install $PROGRAMS -y
+    sudo apt install "${PROGRAMS[@]}" -y
       #--dr-run
       # Don't use double-quotes around $PROGRAMS; we want each string to be separate; not 1 long word;
 
@@ -264,7 +288,7 @@ function doCheck() {
     echo "This script will:"
 
     # To keep it simple, just going to issue command to install all programs; if already installed, then apt should skip it;
-    echo "● Install basic programs: $PROGRAMS"
+    echo "● Install basic programs: ${PROGRAMS[@]}"
     echo "● Install trash-cli with pipx and setup symlinks."
     echo "● Copy configuration files to $HOME directory."
     echo "● Copy vimrc to /root directory."
