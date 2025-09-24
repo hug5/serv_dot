@@ -33,7 +33,8 @@ declare -a PROGRAMS=(
   ncdu
   screen
   ranger
-  fastfetch
+  #neofetch  # In debian 12, not 13
+  fastfetch  # In debian 13, not 12
   fzf
   fd-find
   htop
@@ -152,8 +153,9 @@ function install_programs_basic() {
     sudo chmod 777 /opt
     sudo chmod 777 /usr/local/bin
 
-    if [[ ! -d ~/.local/bin/pipx ]]; then
-        mkdir -p ~/.local/bin/pipx
+    if [[ ! -d ~/.local/bin ]]; then
+        echo "Creating ~/.local/bin"
+        mkdir -p ~/.local/bin
     fi
 
 
