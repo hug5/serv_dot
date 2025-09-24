@@ -129,7 +129,6 @@ function install_programs_basic() {
     sudo chmod 777 /usr/local/bin
 
     if [[ ! -d ~/.local/bin/pipx ]]; then
-
         mkdir -p ~/.local/bin/pipx
     fi
 
@@ -190,6 +189,7 @@ function copy_to_root() {
     sudo cp home_dir/.vimrc /root/
 }
 
+# Deprecated
 function copy_to_neofetch() {
     # if not exist, then create neofetch folder;
     # Then copy the neofetch config.conf file
@@ -232,7 +232,7 @@ function doStart() {
     echo "Making config copies..."
     copy_to_home
     copy_to_root
-    copy_to_neofetch
+    # copy_to_neofetch
     copy_to_ranger
 
     echo "Sourcing ~/.bashrc..."
@@ -264,13 +264,13 @@ function doCheck() {
     echo "This script will:"
 
     # To keep it simple, just going to issue command to install all programs; if already installed, then apt should skip it;
-    echo "∘ Install basic programs: $PROGRAMS"
-    echo "∘ Install trash-cli with pipx and setup symlinks."
-    echo "∘ Copy configuration files to \$HOME directory."
-    echo "∘ Copy vimrc to /root directory."
-    echo "∘ Copy neofetch/config.conf to \$HOME/.config/neofetch."
-    echo "∘ Copy ranger conf files to \$HOME/.config/ranger."
-    echo "∘ You will also be prompted later about installing Postfix."
+    echo "● Install basic programs: $PROGRAMS"
+    echo "● Install trash-cli with pipx and setup symlinks."
+    echo "● Copy configuration files to $HOME directory."
+    echo "● Copy vimrc to /root directory."
+    # echo "● Copy neofetch/config.conf to $HOME/.config/neofetch."  # Deprecated
+    echo "● Copy ranger conf files to $HOME/.config/ranger."
+    echo "● You will also be prompted later about installing Postfix."
     read -p "Do you want to continue? (Y/n): " CHOICE
 
     case "$CHOICE" in
