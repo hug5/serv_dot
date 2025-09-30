@@ -15,8 +15,17 @@
   # 2) Copies .vimrc to /root
   # 3) copies neofetch/config.conf to $HOME/.config/neofetch/
 
+#————————————————————————————————————————————————————————————
 
-#ᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳᅳ
+# What does this do?
+  # Install various programs;
+  # Set up trash-cli with pip, which can be tricky;
+  # Install pipx through pip, not package manager
+  # Install nginx
+  # Instal Postfix optionally;
+  # Setup various user dot files, .bashrc, .bash_aliases
+
+#————————————————————————————————————————————————————————————
 
 declare CONT=false
   # continue operation or not:
